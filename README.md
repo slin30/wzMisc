@@ -1,4 +1,6 @@
 # wzMisc
+https://travis-ci.org/slin30/wzMisc.svg?branch=master
+
 Miscellaneous functions
 
 Install using devtools
