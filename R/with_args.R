@@ -1,0 +1,43 @@
+#' Run FUN and capture args
+#'
+#' Run a function and capture parameters
+#' @param fun_name input FUN. Can be bare or quoted vecor of length 1.
+#' @param ... args for fun_name, preferably named
+#' @details
+#' This function simply captures input args as a list, useful mainly e.g. to pass args downstream.
+#' It is best practice to name funargs for this use case, both to ensure integrity and to facilitate
+#' downstream (re)use. Not using explicit names for input FUN can work, i.e. positional matching,
+#' in some cases, but more often than not will lead to problems. See examples.
+#' @note
+#' Error handling for the edge case where a function arg is called 'fun_name' and passed to ...
+#' is not yet present. Also see examples.
+#' @return
+#' A list of length 3, where the first element is the input fun_name (chr),
+#' the second is the function return, and the third the args. If
+#' funargs are input as a named list (vector), the args will be named.
+#'
+#' The length of each top-level return element depends on the input fun and args.
+#' @export
+#' @examples
+#' with_args(mean, x = 1:10, na.rm = TRUE)
+#' with_args("mean", x = 1:10, na.rm = TRUE) #identical
+#' with_args(mean, 1:10) #positional matching, dangerous!
+#'
+#' \dontrun{
+#' problemFUN <- function(arg1, fun_name) {
+#' arg1 + fun_name
+#' }
+#' with_args(problemFUN, arg1 = 1, fun_name = 2) #error
+#' with_args(problemFUN, arg1 = 1, 2) #no error, but ugly
+#'
+#' with_args(mean, 1:10, TRUE) #error, don't rely on positional matching!
+#' }
+with_args <- function(fun_name, ...) {
+  new.fun  <- match.fun(fun_name)
+  data = new.fun(...)
+  list(
+    fun = as.character(substitute(fun_name)),
+    data = data,
+    args = list(...))
+}
+

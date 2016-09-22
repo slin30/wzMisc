@@ -1,0 +1,58 @@
+#Meta
+#Classes character, logical, logical, integer, integer, character
+#Header TRUE
+
+value, isChr, isExp, result_zeroT, result_zeroF, comment
+100, FALSE, FALSE, 1, 1, basic|short|decimal_FALSE
+10000000, FALSE, FALSE, 1, 1, basic|borderline|decimal_FALSE
+100000000, FALSE, FALSE, 1, 1, basic|long|decimal_FALSE
+100.01, FALSE, FALSE, 5, 5, basic|short|decimal_TRUE
+100000.01, FALSE, FALSE, 8, 8, basic|borderline|decimal_TRUE
+1000000.01, FALSE, FALSE, 9, 9, basic|long|decimal_TRUE
+00100, FALSE, FALSE, 1, 1, leadingZero|short|decimal_FALSE
+00000100, FALSE, FALSE, 1, 1, leadingZero|borderline|decimal_FALSE
+000000100, FALSE, FALSE, 1, 1, leadingZero|long|decimal_FALSE
+00100.01, FALSE, FALSE, 5, 5, leadingZero|short|decimal_TRUE
+000100.01, FALSE, FALSE, 5, 5, leadingZero|borderline|decimal_TRUE
+0000100.01, FALSE, FALSE, 5, 5, leadingZero|long|decimal_TRUE
+1.1230, FALSE, FALSE, 5, 4, trailingZero|short|decimal_TRUE
+1.1230000, FALSE, FALSE, 8, 4, trailingZero|borderline|decimal_TRUE
+1.12300000, FALSE, FALSE, 9, 4, trailingZero|long|decimal_TRUE
+01.1230, FALSE, FALSE, 5, 4, comboZero|short|decimal_TRUE|stressHead
+0001.1230, FALSE, FALSE, 5, 4, comboZero|borderline|decimal_TRUE|stressHead
+000001.1230, FALSE, FALSE, 5, 4, comboZero|long|decimal_TRUE|stressHead
+000001.1230000, FALSE, FALSE, 8, 4, comboZero|borderline|decimal_TRUE|stressCombo
+000001.12300000, FALSE, FALSE, 9, 4, comboZero|long|decimal_TRUE|stessCombo
+1E2, FALSE, TRUE, 1, 1, basic|short|decimal_FALSE
+1E7, FALSE, TRUE, 1, 1, basic|borderline|decimal_FALSE
+1E8, FALSE, TRUE, 1, 1, basic|long|decimal_FALSE
+1.0001E2, FALSE, TRUE, 5, 5, basic|short|decimal_TRUE
+1.0000001E5, FALSE, TRUE, 8, 8, basic|borderline|decimal_TRUE
+001E2, FALSE, TRUE, 1, 1, leadingZero|short|decimal_FALSE
+00000001E2, FALSE, TRUE, 1, 1, leadingZero|borderline|decimal_FALSE
+000000001E2, FALSE, TRUE, 1, 1, leadingZero|long|decimal_FALSE
+1.0E2, FALSE, TRUE, 2, 1, trailingZero|short|decimal_TRUE
+1.000000E2, FALSE, TRUE, 7, 1, trailingZero|borderline|decimal_TRUE
+1.0000000E2, FALSE, TRUE, 8, 1, trailingZero|long|decimal_TRUE
+01.10E2, FALSE, TRUE, 3, 2, comboZero|short|decimal_TRUE
+01.000010E2, FALSE, TRUE, 7, 6, comboZero|borderline|decimal_TRUE
+01.0000010E2, FALSE, TRUE, 8, 7, comboZero|long|decimal_TRUE
+00000001.10E2, FALSE, TRUE, 3, 2, comboZero|short|decimal_TRUE|stressHead
+00000001.000010E2, FALSE, TRUE, 7, 6, comboZero|borderline|decimal_TRUE|stressHead
+00000001.0000010E2, FALSE, TRUE, 8, 7, comboZero|long|decimal_TRUE|stressHead
+00000001.10E200, FALSE, TRUE, 3, 2, comboZero|short|decimal_TRUE|stressHeadExp
+00000001.000010E200, FALSE, TRUE, 7, 6, comboZero|borderline|decimal_TRUE|stressHeadExp
+00000001.0000010E200, FALSE, TRUE, 8, 7, comboZero|long|decimal_TRUE|stressHeadExp
+0, FALSE, FALSE, 1, 0, zeroTest|short|decimal_FALSE
+0000000, FALSE, FALSE, 7, 0, zeroTest|borderline|decimal_FALSE
+00000000, FALSE, FALSE, 8, 0, zeroTest|long|decimal_FALSE
+0.0, FALSE, FALSE, 2, 0, zeroTest|short|decimal_TRUE
+000000.0, FALSE, FALSE, 7, 0, zeroTest|borderline|decimal_TRUE
+000000.00, FALSE, FALSE, 8, 0, zeroTest|long|decimal_TRUE
+0E0, FALSE, TRUE, 1, 0, zeroTest|short|decimal_FALSE
+0000000E0, FALSE, TRUE, 7, 0, zeroTest|borderline|decimal_FALSE
+00000000E0, FALSE, TRUE, 8, 0, zeroTest|long|decimal_FALSE
+0.0E0, FALSE, TRUE, 2, 0, zeroTest|short|decimal_TRUE
+000000.0E0, FALSE, TRUE, 7, 0, zeroTest|borderline|decimal_TRUE
+000000.00E0, FALSE, TRUE, 8, 0, zeroTest|long|decimal_TRUE
+
