@@ -1,7 +1,10 @@
 # wzMisc
-Miscellaneous functions
+[![Build Status](https://travis-ci.org/slin30/wzMisc.svg?branch=master)](https://travis-ci.org/slin30/wzMisc)  
 
-Install using devtools
+
+##Miscellaneous functions package
+
+Install using devtools:
 
 `devtools::install_github("slin30/wzMisc")`
 
