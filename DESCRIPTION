@@ -10,7 +10,7 @@ Depends:
 Imports:
     stringr,
     magrittr
-License: CC0
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests:
