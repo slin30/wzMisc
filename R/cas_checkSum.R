@@ -1,8 +1,8 @@
 #' Check CAS RN validity via checksum method
 #'
-#' For s suspected CAS RN, determine validity by calculating final digit checksum
+#' For a suspected CAS RN, determine validity by calculating final digit checksum
 #'
-#' @param x chr. Input vector of value to check. Standard CAS notation using hypens is fine, as
+#' @param x chr. Input vector of values to check. Standard CAS notation using hyphens is fine, as
 #' all non-digit characters are stripped for checksum calculation. Each element of \emph{x} should contain
 #' only one suspected CAS RN to check.
 #' @param checkLEN logi. Should the function check that the non-digit characters of \emph{x} are at least 4, but no
@@ -13,11 +13,11 @@
 #' the CAS standard. By default, it also ensures that the digit length is compatible with CAS standards. It does nothing
 #' more.
 #'
-#' This means that there is NO check for valid CAS format. Use the \code{\link{cas_detect}} function to check CAS
+#' This means that there is no check for valid CAS format. Use the \code{\link{cas_detect}} function to check CAS
 #' format beforehand, or write your own function if necessary.
 #'
 #' @note
-#' This is a properly vectorized, reasonably high-performance version of the \link[webchem]{is.cas} function found
+#' This is a vectorized, reasonably high-performance version of the \link[webchem]{is.cas} function found
 #' in the \link[webchem]{webchem} package. The functionality encompasses only the actual checksum checking of \code{webchem::is.cas};
 #' as mentioned in \code{details}, use \code{\link{cas_detect}} to recreate the CAS format + checksum checking in
 #' \code{webchem::is.cas}. See examples.

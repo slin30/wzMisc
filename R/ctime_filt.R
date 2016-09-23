@@ -2,12 +2,12 @@
 #'
 #' Identify earliest or latest file(s) by creation time
 #' @param x Input file path
-#' @param pattern Optional regex passed to list.files pattern arg; defaults to .* (any).
-#' @param type Character. One of "min" or "max" (quotes explicit) to denote if function should find earliest or latest, respectively.
-#' Defaults to "max" (most recent file(s))
-#' @param fmt Chr date format for ctime transformation. Defaults to \%Y-\%m-\%d
-#' @param print_limit Optional integer. How many found results should be printed? Defaults to 6. This ONLY affects display results, NOT
-#' returned results!
+#' @param pattern Optional regex passed to \code{list.files} pattern arg; defaults to \code{.*} (any).
+#' @param type One of "min" or "max" (quotes explicit) to denote if function should find
+#' earliest or latest file by creation time, respectively. Defaults to "max" (most recent file(s))
+#' @param fmt \code{character} date format for ctime transformation. Defaults to \%Y-\%m-\%d
+#' @param print_limit Optional integer. How many found results should be printed?
+#' Defaults to 6. This ONLY affects display results, NOT returned results!
 #' @details
 #' This is most useful for filtering out multiple files with similar or identical file names within a single parent
 #' dir, regardless of nesting, by ctime as denoted by file.info.

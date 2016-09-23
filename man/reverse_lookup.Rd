@@ -10,13 +10,13 @@ reverse_lookup(x)
 \item{x}{a named vector, or something coercible to one, with a 1:1 key:value ratio}
 }
 \value{
-A vector of the same length as x, with x's keys as value(s), and x's values as key(s)
+A vector of the same length as \emph{x}, with \emph{x}'s keys as value(s), and \emph{x}'s values as key(s)
 }
 \description{
 Swap a key-value pair's key with value and vice-versa
 }
 \details{
-This is a convenient way to "flip" the key-value relationship for a lookup vector. 
+This is a convenient way to "flip" the key-value relationship for a lookup vector.
 The specific use-case is for a simple key-value vector or list, which means a nested
 hierarchy or a 1:many relationship (key:value) will fail.
 }

@@ -1,6 +1,7 @@
 #' Count number significant figures
 #'
 #' Count number of significant digits (figures), option to include trailing zeros
+#'
 #' @importFrom magrittr %>%
 #' @param x numeric or character vector; only character input is allowed if \code{countTrailing=TRUE}.
 #' @param digits integer of length 1. Optional. Default uses value from \code{getOptions("digits")}. Will

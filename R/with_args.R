@@ -2,14 +2,14 @@
 #'
 #' Run a function and capture parameters
 #' @param fun_name input FUN. Can be bare or quoted vecor of length 1.
-#' @param ... args for fun_name, preferably named
+#' @param ... args for \emph{fun_name}, preferably named
 #' @details
 #' This function simply captures input args as a list, useful mainly e.g. to pass args downstream.
 #' It is best practice to name funargs for this use case, both to ensure integrity and to facilitate
 #' downstream (re)use. Not using explicit names for input FUN can work, i.e. positional matching,
 #' in some cases, but more often than not will lead to problems. See examples.
 #' @note
-#' Error handling for the edge case where a function arg is called 'fun_name' and passed to ...
+#' Error handling for the edge case where a function arg is called 'fun_name' and passed to \code{...}
 #' is not yet present. Also see examples.
 #' @return
 #' A list of length 3, where the first element is the input fun_name (chr),

@@ -2,12 +2,12 @@
 % Please edit documentation in R/cas_rand.R
 \name{cas_rand}
 \alias{cas_rand}
-\title{Generate random validly formatted CAS RN}
+\title{Generate random validly formatted CAS RNs}
 \usage{
 cas_rand(n)
 }
 \arguments{
-\item{n}{integer. How many random CAS do you wish to generate? \code{numeric} or \code{character}
+\item{n}{integer. How many random CAS RNs do you wish to generate? \code{numeric} or \code{character}
 input will be coerced to integer, if possible. Negative (valid) input will be transformed to
 positive via \code{abs}}
 }
@@ -15,11 +15,11 @@ positive via \code{abs}}
 A vector of random CAS RNs of length \emph{n}.
 }
 \description{
-Make random CAS RN of valid length format, without checksum consideration
+Make random CAS RNs of valid length format, without checksum consideration
 }
 \details{
-Generate \emph{n} random CAS with valid CAS digit length, per section and overall. Random applies to
-all three sections of a CAS, and for the first section, lengths will be randomly betwen \code{2:7}.
+Generate \emph{n} random CAS RNs with valid CAS digit length (per section and overall). Random applies to
+all three sections of a CAS RN; for the first section, lengths will also be of random length, between \code{2:7}.
 
 This function does not perform any additional validation, which means duplicate CAS are possible.
 More importantly, there is no last (checksum) digit validation.

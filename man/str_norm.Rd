@@ -7,18 +7,18 @@
 str_norm(x, lower = FALSE, ..., to_ASCII = TRUE)
 }
 \arguments{
-\item{x}{Input chr vector, or something coercible to chr}
+\item{x}{character vector, or something coercible to chr}
 
-\item{lower}{Lowercase the output? Defaults to FALSE}
+\item{lower}{Lowercase the output? Defaults to \code{FALSE}}
 
 \item{...}{args to str_replace_all, i.e. pattern and replacement}
 
 \item{to_ASCII}{Logical. Should function first transform input to ASCII (this is often helpful for
-otherwise stubborn special characters)? Defaults to TRUE}
+otherwise stubborn special characters)? Defaults to \code{TRUE}}
 }
 \value{
-A character vector normalized according to input args and ws-normalized. See details
-for what ws-normalized means.
+A \code{character} vector normalized according to input args and ws-normalized of length equal to
+\emph{x}. See details for what ws-normalized means.
 }
 \description{
 Strips special chars, lowercases, optionally re-encode to ASCII
@@ -28,11 +28,11 @@ This is a convenience function designed to streamline e.g. fuzzy chr matching, p
 scraped text. Therefore, some options are intentionally hard-coded, i.e.
 any whitespace repeats >1 are truncated to 1, and the output is ws-trimmed on both sides.
 
-If no args are passed to ... for str_replace_all, generic defaults are used. These defaults are meant
-to provide a potentially more useful output than just an error message, but this practice somewhat
-violates error handling paradigms by still trying to return something, which might not be intended.
-As such, this behavior might change in future versions, and explicit arguments to
-\link[stringr]{str_replace_all} should always be provided.
+If no args are passed to \code{...} for \link[stringr]{str_replace_all}, generic defaults are used.
+These defaults are meant to provide a potentially more useful output than just an error message,
+but this practice somewhat violates error handling paradigms by still trying to return something,
+which might not be expected As such, this behavior might change in future versions, and explicit arguments to
+\link[stringr]{str_replace_all} (again, via \code{...}) should always be provided.
 }
 \examples{
 x <- "Corrosion Survey Database (CORâ€¢SUR)"

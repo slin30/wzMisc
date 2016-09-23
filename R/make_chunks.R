@@ -7,7 +7,7 @@
 #' @param start Optional. A positive (nonzero) integer denoting where to start; defaults to \code{1L}
 #' @param limit Optional. A positive (nonzero) integer denoting the maxinum chunk size; no limit by default
 #' @param n.fx Optional. A positive (nonzero) numeric denoting the factor to increase n and chunk_size beyond the input limit.
-#' Defaults to 1.00 (identity). Should be very rarely needed.
+#' Defaults to \code{1.00} (identity). Should be very rarely needed.
 #'
 #' @details
 #' This function creates equally-spaced, or as equal as possible, start (\emph{from}) and end (\emph{to}) points.
@@ -20,15 +20,15 @@
 #' than previous ones. Additionally, if \emph{n} \code{<} \emph{chunk_size}, the latter will automatically
 #' be truncated to \emph{n}, or if \emph{n.fx} \code{!= 1.00} (default), towards \emph{n}\code{*} \emph{n.fx}.
 #'
-#' The \emph{start} argument optionally enables setting a start point that is not the default, 1. This is
+#' The \emph{start} argument optionally enables setting a start point that is not the default (\code{1}). This is
 #' useful if you wish to e.g make an API call starting from a specific index.
 #'
 #' The limit argument optionally enables setting a \emph{chunk_size} threshold to e.g. ensure that a
 #' \emph{chunk_size} > \emph{limit} is not possible. This should be set if using \emph{n.fx}!
 #'
 #' @note
-#' Inputs other than \emph{n.fx} should be integers. They need not be multiples of one another. Aside from
-#' \emph{n.fx}, numerics will be coerced to integer via \code{as.integer}, and this may create unexpected,
+#' Inputs other than \emph{n.fx} should be of type \code{integer}. They need not be multiples of one another.
+#' Aside from \emph{n.fx}, numerics will be coerced to integer via \code{as.integer}, and this may create unexpected,
 #' although still correct (from an integer coercion perspective) results.
 #'
 #' In typical use, \emph{n.fx} will not be used, even if it is explicitly provided; the anticipated use case for

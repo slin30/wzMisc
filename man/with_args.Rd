@@ -9,7 +9,7 @@ with_args(fun_name, ...)
 \arguments{
 \item{fun_name}{input FUN. Can be bare or quoted vecor of length 1.}
 
-\item{...}{args for fun_name, preferably named}
+\item{...}{args for \emph{fun_name}, preferably named}
 }
 \value{
 A list of length 3, where the first element is the input fun_name (chr),
@@ -28,7 +28,7 @@ downstream (re)use. Not using explicit names for input FUN can work, i.e. positi
 in some cases, but more often than not will lead to problems. See examples.
 }
 \note{
-Error handling for the edge case where a function arg is called 'fun_name' and passed to ...
+Error handling for the edge case where a function arg is called 'fun_name' and passed to \code{...}
 is not yet present. Also see examples.
 }
 \examples{

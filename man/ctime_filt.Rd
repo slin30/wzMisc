@@ -10,15 +10,15 @@ ctime_filt(x, pattern, type = c("max", "min"), fmt = "\%Y-\%m-\%d",
 \arguments{
 \item{x}{Input file path}
 
-\item{pattern}{Optional regex passed to list.files pattern arg; defaults to .* (any).}
+\item{pattern}{Optional regex passed to \code{list.files} pattern arg; defaults to \code{.*} (any).}
 
-\item{type}{Character. One of "min" or "max" (quotes explicit) to denote if function should find earliest or latest, respectively.
-Defaults to "max" (most recent file(s))}
+\item{type}{One of "min" or "max" (quotes explicit) to denote if function should find
+earliest or latest file by creation time, respectively. Defaults to "max" (most recent file(s))}
 
-\item{fmt}{Chr date format for ctime transformation. Defaults to \%Y-\%m-\%d}
+\item{fmt}{\code{character} date format for ctime transformation. Defaults to \%Y-\%m-\%d}
 
-\item{print_limit}{Optional integer. How many found results should be printed? Defaults to 6. This ONLY affects display results, NOT
-returned results!}
+\item{print_limit}{Optional integer. How many found results should be printed?
+Defaults to 6. This ONLY affects display results, NOT returned results!}
 }
 \value{
 A vector of files (full path names) that meet the type criteria (earliest or latest) and any other constraints,

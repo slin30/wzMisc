@@ -33,17 +33,17 @@ Checks for CAS basic formatting rules only, i.e.
 \item{Section 3 length \code{==1}}
 }
 
-If \emph{preprocess=TRUE}, note that \link[stringr]{str_trim} is called with default options, i.e.
+If \code{preprocess=TRUE}, note that \link[stringr]{str_trim} is called with default options, i.e.
 \code{sides = "both"}, and this is the only whitespace modification performed on the intermediate vector. If you
-wish to ensure that all whitespaces are remoted, you should perform this upstream, i.e. this function will
+wish to ensure that all whitespaces are removed, you should perform this upstream, i.e. this function will
 not strip all whitespaces for you.
 }
 \note{
 There is a significant difference between something that looks like a CAS and is a (valid) CAS. This function
-should have a low false negative rate, i.e. if it flags \emph{x} as \code{FALSE}, it is almost certainly the case.
-A result of \code{TRUE}, however, only means that the input meets the aforementioned criteria (see details).
+should have a low false negative rate, i.e. if it flags \emph{x} as \code{FALSE}, you can believe the result.
+A return of \code{TRUE}, however, only means that the input meets the aforementioned criteria (see details).
 
-Use \code{\link{cas_checkSum}} to determine if inputs determined as being CAS(-like) also pass the last-digit
+Use \code{\link{cas_checkSum}} to determine if \code{TRUE} inputs also pass the last-digit
 checksum check. See examples.
 }
 \examples{

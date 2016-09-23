@@ -10,14 +10,14 @@ mode_stat(x)
 \item{x}{input vector}
 }
 \value{
-The most frequent value in x, or see details for exception cases.
-Will throw a warning if length(unique(x) == length(x)).
+The most frequent value in \emph{x}, or see details for exception cases.
+Will throw a warning if \code{length(unique(x) == length(x))}.
 }
 \description{
 Calculates the mode of x.
 }
 \details{
-In case of ties, or if length(x) == 1, will return the first value.
+In case of ties, or if \code{length(x) == 1}, will return the first value.
 The standard caveats apply to floats; see examples.
 }
 \note{

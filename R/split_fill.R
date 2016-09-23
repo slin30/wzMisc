@@ -3,24 +3,23 @@
 #' Split a chr vector based on sep, return melted DT by ID
 #' @import data.table
 #' @param dat a data.table
-#' @param targ chr; vector of length 1 that contains data to be split
+#' @param targ chr; vector of length 1 denoting column that contains data to be split
 #' @param split_on chr; what pattern should be used to perform the split?
 #' @param IDcol chr; vector of length 1 denoting the column in \emph{dat} containing the ID to be used for melting
 #' @param rebind logical; should the original columns be appended back to the output? Defaults to \code{FALSE}
 #' @param keep.targ logical; only used if \emph{rebind} = \code{TRUE}; drop the column that was split on?
 #' @details
-#' This is a convenience-convenience wrapper around \code{data.table::tstrsplit}, taking advantage
-#' of the performance of Ctranspose, and adding faculties to melt and rejoin selectively.
+#' This is a convenience-convenience (not a typo) wrapper around \code{data.table::tstrsplit}, taking advantage
+#' of the performance of \code{data.table::Ctranspose}, and adding faculties to melt and rejoin selectively.
 #'
 #' @note
 #' \emph{targ} currently is limited to a vector of length 1, as is \emph{IDcol}. This is likely to change in the future, to
-#' make this function more flexible and consistent with the capabilities of \code{melt.data.table}. At the moment, still
-#' trying to understand \code{data.table} scoping rules.
+#' make this function more flexible and consistent with the capabilities of \code{melt.data.table}.
 #' @return
 #' A melted data.table using \emph{IDcol} as \code{id.var} for \link[data.table]{melt.data.table},
-#' with \emph{targ} splitted by split_on.
+#' with \emph{targ} splitted by \emph{split_on}.
 #'
-#' If \emph{rebind} == \code{TRUE}, will also return the original columns, with a single \emph{IDcol} as denoted
+#' If \code{rebind == TRUE}, will also return the original columns, with a single \emph{IDcol} as denoted
 #' in input. This is performed via a \code{data.table} ad-hoc join, using \emph{IDcol} in \code{j}. The input
 #' \emph{targ} column will be returned as well, if \emph{keep.targ} is \code{TRUE}.
 #' @export
