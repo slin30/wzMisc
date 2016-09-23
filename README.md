@@ -3,6 +3,9 @@
 
 
 ##Miscellaneous functions package
+###Version 0.1.001
+
+This is the initial release suitable for public consumption. 
 
 Install using devtools:
 
