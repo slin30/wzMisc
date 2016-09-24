@@ -101,7 +101,7 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
     }
     else {
       #Reverse clean string first, then split (V2 is before decimal, V1 after)
-      x_rev <- sapply(x, function(f) paste(rev(substring(f, 1:nchar(f), 1:nchar(f))), collapse = ""))
+      x_rev <- sapply(x, function(f) .paste_helper(f))
       xmat <- stringr::str_split_fixed(x_rev, "\\.", 2)
       #transform blank in V2 to NA
       xmat[, 2] <- .helper_blankToNA(xmat[, 2])
@@ -134,6 +134,13 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
   out[na_input] <- NA
   as.integer(out)
 
+}
+
+
+.paste_helper <- function(x) {
+  ifelse(is.na(x), x,
+         paste(rev(substring(x, 1:nchar(x), 1:nchar(x))), collapse = "")
+  )
 }
 
 .helper_blankToNA <- function(x) {

@@ -37,10 +37,17 @@ test_that("All NA input throws error with countTrailing=TRUE", {
 
 })
 
-test_that("NA coercion throws a warning", {
+test_that("NA coercion throws a warning with countTrailing=FALSE", {
   x   <- c(NA, 1, "NA", 0, "a", 1.0)
 
   expect_warning(count_sigfigs(x))
+
+})
+
+test_that("NA coercion throws a warning with countTrailing=TRUE", {
+  x   <- c(NA, 1, "NA", 0, "a", 1.0)
+
+  expect_warning(count_sigfigs(x, countTrailing = TRUE))
 
 })
 
