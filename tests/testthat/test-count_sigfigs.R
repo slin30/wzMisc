@@ -27,6 +27,31 @@ test_that("countTrailing=TRUE fails with non-chr input", {
 
 })
 
+test_that("All NA input throws error", {
+  expect_error(count_sigfigs(c(NA, NA)))
+
+})
+
+test_that("All NA input throws error with countTrailing=TRUE", {
+  expect_error(count_sigfigs(c(NA, NA), countTrailing = TRUE))
+
+})
+
+test_that("NA coercion throws a warning", {
+  x   <- c(NA, 1, "NA", 0, "a", 1.0)
+
+  expect_warning(count_sigfigs(x))
+
+})
+
+test_that("NA with non-NA input returns NA only for invalid or NA input", {
+  x   <- c(NA, 1, "NA", 0, "a", 1.0)
+  res <- c(NA, 1, NA, 0, NA, 1)
+
+  expect_equal(suppressWarnings(count_sigfigs(x)), res)
+
+})
+
 test_that("result_zeroF and tst are NOT identical when digits = 9 and countTrailing=FALSE", {
   ref <- tst_dat$result_zeroF
   tst <- count_sigfigs(tst_dat[["value"]], digits = 7, countTrailing = FALSE)

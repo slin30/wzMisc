@@ -72,6 +72,9 @@
 #' }
 
 count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALSE) {
+  if(all(is.na(x))) {
+    stop("All inputs are NA")
+  }
   if (countTrailing && !is.character(x)) {
     stop(paste("countTrailing is only possible with chr inputs of x"))
   }
@@ -80,10 +83,13 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
                   "and results may be inaccurate.", "Proceed at your own risk!"))
   }
 
+  #Capture NA input
+  na_input <- is.na(x) | is.na(as.numeric(x))
   #prepare to handle all zeros downstream
   xtype       <- class(x)
   digitCounts <- stringr::str_extract(x, "\\d*\\.?\\d*") %>% stringr::str_count("\\d")
   zeroCheck   <- as.numeric(x) == 0
+  zeroCheck[is.na(zeroCheck)] <- FALSE
 
   if (!countTrailing) {
     extra <- 0
@@ -117,6 +123,7 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
     out[zeroCheck] <- digitCounts[zeroCheck]
   }
 
+  out[na_input] <- NA
   as.integer(out)
 
 }
