@@ -70,7 +70,6 @@
 #' #also
 #' count_sigfigs(1000000001.12345, digits = 15) #pushing it
 #' }
-
 count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALSE) {
   if(all(is.na(x))) {
     stop("All inputs are NA")
@@ -95,14 +94,23 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
     extra <- 0
   }
   if (is.character(x)) {
+    #strip E or e
     x <- stringr::str_replace(x, "^-?\\$?(\\d+\\.?\\d*)(?=E?|e?)(.*)", "\\1")
     if (!countTrailing) {
       x <- as.numeric(x)
     }
     else {
-      x.tmp <- sapply(x, function(f) paste(rev(substring(f, 1:nchar(f), 1:nchar(f))), collapse = ""))
-      extra <- stringr::str_match(x.tmp, "^(\\d+-?(?i)e)?(0*)[1-9]*[\\d]*\\.\\d*")[, 3] %>%
-        nchar
+      #Reverse clean string first, then split (V2 is before decimal, V1 after)
+      x_rev <- sapply(x, function(f) paste(rev(substring(f, 1:nchar(f), 1:nchar(f))), collapse = ""))
+      xmat <- stringr::str_split_fixed(x_rev, "\\.", 2)
+      #transform blank in V2 to NA
+      xmat[, 2] <- .helper_blankToNA(xmat[, 2])
+      #Count zeros
+      xmat_true <- apply(xmat, 2, function(f) .helper_zeroCount(f))
+      xmat_true <- matrix(xmat_true, ncol = 2) #handle single input coercion
+      xmat_true[, 1] <- .helper_zeroToNA(xmat_true[, 1]) #prevent extra counts
+
+      extra <- apply(xmat_true, 1, function(f) sum(f))
       extra[is.na(extra)] <- 0
 
       x <- as.numeric(x) #and transform back to numeric after capturing extra
@@ -127,3 +135,20 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
   as.integer(out)
 
 }
+
+.helper_blankToNA <- function(x) {
+  x[x==""] <- NA
+  x
+}
+
+.helper_zeroToNA <- function(x) {
+  x[x==0] <- NA
+  x
+}
+
+.helper_zeroCount <- function(x) {
+  n <- stringr::str_extract(x, "^0?0*")
+  nchar(n)
+}
+
+

@@ -9,6 +9,10 @@ value, isChr, isExp, result_zeroT, result_zeroF, comment
 100.01, FALSE, FALSE, 5, 5, basic|short|decimal_TRUE
 100000.01, FALSE, FALSE, 8, 8, basic|borderline|decimal_TRUE
 1000000.01, FALSE, FALSE, 9, 9, basic|long|decimal_TRUE
+100.0, FALSE, FALSE, 4, 1, basic|short|decimal_TRUE
+100.00000, FALSE, FALSE, 8, 1, basic|borderline|decimal_TRUE
+0100.0, FALSE, FALSE, 4, 1, leadingZero|short|decimal_TRUE
+0000100.00000, FALSE, FALSE, 8, 1, leadingZero|borderline|decimal_TRUE
 00100, FALSE, FALSE, 1, 1, leadingZero|short|decimal_FALSE
 00000100, FALSE, FALSE, 1, 1, leadingZero|borderline|decimal_FALSE
 000000100, FALSE, FALSE, 1, 1, leadingZero|long|decimal_FALSE
