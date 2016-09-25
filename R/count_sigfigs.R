@@ -96,7 +96,7 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
   }
   if (is.character(x)) {
     #strip E or e
-    x <- stringr::str_replace(x, "^-?\\$?(\\d+\\.?\\d*)(?=E?|e?)(.*)", "\\1")
+    x <- stringr::str_extract(x, "(\\d+\\.?\\d*)")
     if (!countTrailing) {
       x <- suppressWarnings(as.numeric(x))
     }
@@ -134,7 +134,7 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
     digits <- as.integer(digits)
     x      <- sprintf(paste0("%0.", digits, "e"), x)
   }
-  targ   <- stringr::str_replace(x, "^-?\\$?(\\d+\\.?\\d*)(?=E?|e?)(.*)", "\\1")
+  targ   <- stringr::str_extract(x, "(\\d+\\.?\\d*)")
   splits <- stringr::str_match(targ, "^0*([0-9]*)\\.?([0-9]*[^0$])") %>%
     apply(X = ., 2, list) %>% unlist(recursive = FALSE)
 
