@@ -87,7 +87,7 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
   #prepare to handle all zeros downstream
   xtype       <- class(x)
   digitCounts <- stringr::str_extract(x, "\\d*\\.?\\d*") %>% stringr::str_count("\\d")
-  zeroCheck   <- as.numeric(x) == 0
+  zeroCheck   <- suppressWarnings(as.numeric(x)) == 0
   zeroCheck[is.na(zeroCheck)] <- FALSE
 
   if (!countTrailing) {
@@ -97,23 +97,36 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
     #strip E or e
     x <- stringr::str_replace(x, "^-?\\$?(\\d+\\.?\\d*)(?=E?|e?)(.*)", "\\1")
     if (!countTrailing) {
-      x <- as.numeric(x)
+      x <- suppressWarnings(as.numeric(x))
     }
     else {
-      #Reverse clean string first, then split (V2 is before decimal, V1 after)
-      x_rev <- sapply(x, function(f) .paste_helper(f))
-      xmat <- stringr::str_split_fixed(x_rev, "\\.", 2)
-      #transform blank in V2 to NA
-      xmat[, 2] <- .helper_blankToNA(xmat[, 2])
-      #Count zeros
-      xmat_true <- apply(xmat, 2, function(f) .helper_zeroCount(f))
-      xmat_true <- matrix(xmat_true, ncol = 2) #handle single input coercion
-      xmat_true[, 1] <- .helper_zeroToNA(xmat_true[, 1]) #prevent extra counts
+      #Split, handle NAs
+      splits <- stringr::str_split_fixed(x, "\\.", 2) %>%
+        matrix(., ncol = 2) %>%
+        apply(X = ., 2, function(x) {
+          x[is.na(suppressWarnings(as.numeric(x)))] <- NA
+          x}) %>%
+        matrix(., ncol = 2)
 
-      extra <- apply(xmat_true, 1, function(f) sum(f))
+      #Handle V1 leading zeros
+      splits[, 1] <- stringr::str_replace(splits[, 1], "^0?0*", "")
+      splits[, 1] <- ifelse(splits[, 1] == "", NA, splits[, 1])
+      #Process V2 based on V1
+      splits[, 2] <- ifelse(is.na(splits[, 1]), stringr::str_replace(splits[, 2], "^0?0*", ""), splits[, 2])
+      # Conditional extract V1
+      V1_filt <- vapply(splits[, 2], function(f) as.integer(f) == 0, logical(1))
+      V1_filt[is.na(V1_filt)] <- FALSE
+      V1_val  <- stringr::str_extract(splits[, 1], "0*$") %>% nchar
+
+      V1_extra <- rep(0, length(V1_filt))
+      V1_extra[V1_filt] <- V1_val[V1_filt]
+
+      #Extract terminal zero(s) and count
+      extra <- stringr::str_extract(splits[, 2], "0*$") %>% nchar
       extra[is.na(extra)] <- 0
+      extra <- extra + V1_extra
 
-      x <- as.numeric(x) #and transform back to numeric after capturing extra
+      x <- suppressWarnings(as.numeric(x)) #and transform back to numeric after capturing extra
     }
   }
   if (is.numeric(x)) {
@@ -135,27 +148,3 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
   as.integer(out)
 
 }
-
-
-.paste_helper <- function(x) {
-  ifelse(is.na(x), x,
-         paste(rev(substring(x, 1:nchar(x), 1:nchar(x))), collapse = "")
-  )
-}
-
-.helper_blankToNA <- function(x) {
-  x[x==""] <- NA
-  x
-}
-
-.helper_zeroToNA <- function(x) {
-  x[x==0] <- NA
-  x
-}
-
-.helper_zeroCount <- function(x) {
-  n <- stringr::str_extract(x, "^0?0*")
-  nchar(n)
-}
-
-

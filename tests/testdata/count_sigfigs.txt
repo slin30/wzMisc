@@ -59,4 +59,9 @@ value, isChr, isExp, result_zeroT, result_zeroF, comment
 0.0E0, FALSE, TRUE, 2, 0, zeroTest|short|decimal_TRUE
 000000.0E0, FALSE, TRUE, 7, 0, zeroTest|borderline|decimal_TRUE
 000000.00E0, FALSE, TRUE, 8, 0, zeroTest|long|decimal_TRUE
-
+0.00341, FALSE, FALSE, 3, 3, lessThanOne|short|decimal_TRUE
+1.00341, FALSE, FALSE, 6, 6, moreThanOne|short|decimal_TRUE
+1.00341E10, FALSE, TRUE, 6, 6, moreThanOne|short|decimal_TRUE|stressTailExp
+0.0007, FALSE, FALSE, 1, 1, lessThanOne|short|decimal_TRUE
+0.000700, FALSE, FALSE, 3, 1, lessThanOne|short|decimal_TRUE_stressTail
+0.070, FALSE, FALSE, 2, 1, lessThanOne|short|decimal_TRUE|githubissueRef
