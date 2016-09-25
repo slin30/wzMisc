@@ -46,8 +46,9 @@ in fact meaningful from a precision/measurement perspective.
 }
 \examples{
 set.seed(1)
-x <- Map(signif, rnorm(10), 1:10)
+x <- mapply(signif, rnorm(10), 1:10)
 count_sigfigs(x)
+count_sigfigs(x, digits = 10)
 
 #Also works for scientific notation
 count_sigfigs(c(1E10, -1E10, -000001E-10)) #all 1

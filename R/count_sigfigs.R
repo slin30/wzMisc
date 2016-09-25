@@ -34,8 +34,9 @@
 #' @export
 #' @examples
 #' set.seed(1)
-#' x <- Map(signif, rnorm(10), 1:10)
+#' x <- mapply(signif, rnorm(10), 1:10)
 #' count_sigfigs(x)
+#' count_sigfigs(x, digits = 10)
 #'
 #' #Also works for scientific notation
 #' count_sigfigs(c(1E10, -1E10, -000001E-10)) #all 1
@@ -114,7 +115,7 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
       #Process V2 based on V1
       splits[, 2] <- ifelse(is.na(splits[, 1]), stringr::str_replace(splits[, 2], "^0?0*", ""), splits[, 2])
       # Conditional extract V1
-      V1_filt <- vapply(splits[, 2], function(f) as.integer(f) == 0, logical(1))
+      V1_filt <- suppressWarnings(as.integer(splits[, 2])) == 0
       V1_filt[is.na(V1_filt)] <- FALSE
       V1_val  <- stringr::str_extract(splits[, 1], "0*$") %>% nchar
 
