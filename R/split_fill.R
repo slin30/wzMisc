@@ -8,6 +8,7 @@
 #' @param IDcol chr; vector of length 1 denoting the column in \emph{dat} containing the ID to be used for melting
 #' @param rebind logical; should the original columns be appended back to the output? Defaults to \code{FALSE}
 #' @param keep.targ logical; only used if \emph{rebind} = \code{TRUE}; drop the column that was split on?
+#' @param fixed logical; as in \code{fixed} within \code{\link{strsplit}}. Defaults to \code{TRUE}
 #' @details
 #' This is a convenience-convenience (not a typo) wrapper around \code{data.table::tstrsplit}, taking advantage
 #' of the performance of \code{data.table::Ctranspose}, and adding faculties to melt and rejoin selectively.
@@ -36,9 +37,9 @@
 #' dt[, targ_additional := targ]
 #' head(split_fill(dat = dt, targ = "targ", split_on = "\\|", IDcol = "ID", rebind = TRUE))
 #'
-split_fill <- function(dat, targ, split_on, IDcol, rebind = FALSE, keep.targ = FALSE) {
+split_fill <- function(dat, targ, split_on, IDcol, rebind = FALSE, keep.targ = FALSE, fixed = TRUE) {
 
-  splts_fill <- data.table::tstrsplit(dat[[targ]], split_on, fixed = TRUE) %>%
+  splts_fill <- data.table::tstrsplit(dat[[targ]], split_on, fixed = fixed) %>%
     as.data.table %>%
     .[, c(IDcol) := dat[[IDcol]]]
   out <- melt.data.table(splts_fill, measure.vars = patterns("V[0-9]"),

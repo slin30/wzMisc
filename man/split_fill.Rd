@@ -4,7 +4,8 @@
 \alias{split_fill}
 \title{Split and fill a chr vector}
 \usage{
-split_fill(dat, targ, split_on, IDcol, rebind = FALSE, keep.targ = FALSE)
+split_fill(dat, targ, split_on, IDcol, rebind = FALSE, keep.targ = FALSE,
+  fixed = TRUE)
 }
 \arguments{
 \item{dat}{a data.table}
@@ -18,6 +19,8 @@ split_fill(dat, targ, split_on, IDcol, rebind = FALSE, keep.targ = FALSE)
 \item{rebind}{logical; should the original columns be appended back to the output? Defaults to \code{FALSE}}
 
 \item{keep.targ}{logical; only used if \emph{rebind} = \code{TRUE}; drop the column that was split on?}
+
+\item{fixed}{logical; as in \code{fixed} within \code{\link{strsplit}}. Defaults to \code{TRUE}}
 }
 \value{
 A melted data.table using \emph{IDcol} as \code{id.var} for \link[data.table]{melt.data.table},
