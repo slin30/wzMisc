@@ -8,7 +8,7 @@
 #' @param IDcol chr; vector of length 1 denoting the column in \emph{dat} containing the ID to be used for melting
 #' @param rebind logical; should the original columns be appended back to the output? Defaults to \code{FALSE}
 #' @param keep.targ logical; only used if \emph{rebind} = \code{TRUE}; drop the column that was split on?
-#' @param fixed logical; as in \code{fixed} within \code{\link{strsplit}}. Defaults to \code{TRUE}
+#' @param ... Other (prefereably named) arguments to pass on to \code{strsplit} aside from \emph{split}
 #' @details
 #' This is a convenience-convenience (not a typo) wrapper around \code{data.table::tstrsplit}, taking advantage
 #' of the performance of \code{data.table::Ctranspose}, and adding faculties to melt and rejoin selectively.
@@ -16,8 +16,12 @@
 #' @note
 #' \emph{targ} currently is limited to a vector of length 1, as is \emph{IDcol}. This is likely to change in the future, to
 #' make this function more flexible and consistent with the capabilities of \code{melt.data.table}.
+#'
+#' Use \code{...} to pass e.g. \code{fixed = TRUE} or \code{perl = TRUE} to \code{strsplit}. See documentation
+#' for \code{\link[data.table]{tstrsplit}}.
+#'
 #' @return
-#' A melted data.table using \emph{IDcol} as \code{id.var} for \link[data.table]{melt.data.table},
+#' A melted data.table using \emph{IDcol} as \code{id.var} for \code{melt.data.table},
 #' with \emph{targ} splitted by \emph{split_on}.
 #'
 #' If \code{rebind == TRUE}, will also return the original columns, with a single \emph{IDcol} as denoted
@@ -37,9 +41,10 @@
 #' dt[, targ_additional := targ]
 #' head(split_fill(dat = dt, targ = "targ", split_on = "\\|", IDcol = "ID", rebind = TRUE))
 #'
-split_fill <- function(dat, targ, split_on, IDcol, rebind = FALSE, keep.targ = FALSE, fixed = TRUE) {
+split_fill <- function(dat, targ, split_on, IDcol,
+                       rebind = FALSE, keep.targ = FALSE, ...) {
 
-  splts_fill <- data.table::tstrsplit(dat[[targ]], split_on, fixed = fixed) %>%
+  splts_fill <- data.table::tstrsplit(dat[[targ]], split_on, ...) %>%
     as.data.table %>%
     .[, c(IDcol) := dat[[IDcol]]]
   out <- melt.data.table(splts_fill, measure.vars = patterns("V[0-9]"),

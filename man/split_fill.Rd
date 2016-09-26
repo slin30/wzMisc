@@ -5,7 +5,7 @@
 \title{Split and fill a chr vector}
 \usage{
 split_fill(dat, targ, split_on, IDcol, rebind = FALSE, keep.targ = FALSE,
-  fixed = TRUE)
+  ...)
 }
 \arguments{
 \item{dat}{a data.table}
@@ -20,10 +20,10 @@ split_fill(dat, targ, split_on, IDcol, rebind = FALSE, keep.targ = FALSE,
 
 \item{keep.targ}{logical; only used if \emph{rebind} = \code{TRUE}; drop the column that was split on?}
 
-\item{fixed}{logical; as in \code{fixed} within \code{\link{strsplit}}. Defaults to \code{TRUE}}
+\item{...}{Other (prefereably named) arguments to pass on to \code{strsplit} aside from \emph{split}}
 }
 \value{
-A melted data.table using \emph{IDcol} as \code{id.var} for \link[data.table]{melt.data.table},
+A melted data.table using \emph{IDcol} as \code{id.var} for \code{melt.data.table},
 with \emph{targ} splitted by \emph{split_on}.
 
 If \code{rebind == TRUE}, will also return the original columns, with a single \emph{IDcol} as denoted
@@ -40,6 +40,9 @@ of the performance of \code{data.table::Ctranspose}, and adding faculties to mel
 \note{
 \emph{targ} currently is limited to a vector of length 1, as is \emph{IDcol}. This is likely to change in the future, to
 make this function more flexible and consistent with the capabilities of \code{melt.data.table}.
+
+Use \code{...} to pass e.g. \code{fixed = TRUE} or \code{perl = TRUE} to \code{strsplit}. See documentation
+for \code{\link[data.table]{tstrsplit}}.
 }
 \examples{
 set.seed(1)
