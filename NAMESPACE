@@ -3,6 +3,7 @@
 export(cas_checkSum)
 export(cas_detect)
 export(cas_rand)
+export(cols_class)
 export(count_sigfigs)
 export(ctime_filt)
 export(depth)
