@@ -8,6 +8,7 @@
 #' @param fmt \code{character} date format for ctime transformation. Defaults to \%Y-\%m-\%d
 #' @param print_limit Optional integer. How many found results should be printed?
 #' Defaults to 6. This ONLY affects display results, NOT returned results!
+#' @param ... Other arguments to pass to list.files, aside from \code{pattern}
 #' @details
 #' This is most useful for filtering out multiple files with similar or identical file names within a single parent
 #' dir, regardless of nesting, by ctime as denoted by file.info.
@@ -23,7 +24,7 @@
 #' x <- list.files(R.home("doc"), full.names = TRUE)
 #' ctime_filt(x) #use defaults
 #' ctime_filt(x, pattern = ".html|.png", type = "max")
-ctime_filt <- function(x, pattern, type = c("max", "min"), fmt = "%Y-%m-%d", print_limit = 6L) {
+ctime_filt <- function(x, pattern, type = c("max", "min"), fmt = "%Y-%m-%d", print_limit = 6L, ...) {
 
   if(missing(type)) {
     message("Type arg missing; defaulting to max")
@@ -34,8 +35,7 @@ ctime_filt <- function(x, pattern, type = c("max", "min"), fmt = "%Y-%m-%d", pri
     pattern = ".*"
   }
 
-  files <- list.files(x, full.names = TRUE, include.dirs = FALSE, recursive = TRUE,
-                      pattern = pattern)
+  files <- list.files(x, full.names = TRUE, pattern = pattern, ...)
   finfo <- file.info(files)[["ctime"]]
   targ  <- match.fun(type)(as.Date(format(finfo, fmt)))
 

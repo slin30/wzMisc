@@ -5,7 +5,7 @@
 \title{Filter files by ctime}
 \usage{
 ctime_filt(x, pattern, type = c("max", "min"), fmt = "\%Y-\%m-\%d",
-  print_limit = 6L)
+  print_limit = 6L, ...)
 }
 \arguments{
 \item{x}{Input file path}
@@ -19,6 +19,8 @@ earliest or latest file by creation time, respectively. Defaults to "max" (most 
 
 \item{print_limit}{Optional integer. How many found results should be printed?
 Defaults to 6. This ONLY affects display results, NOT returned results!}
+
+\item{...}{Other arguments to pass to list.files, aside from \code{pattern}}
 }
 \value{
 A vector of files (full path names) that meet the type criteria (earliest or latest) and any other constraints,

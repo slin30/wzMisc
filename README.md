@@ -3,7 +3,7 @@
 
 
 ##Miscellaneous functions package
-###Version 0.1.020
+###Version 0.1.021
 
 This is the initial release suitable for public consumption. 
 
@@ -11,10 +11,9 @@ Install using devtools:
 
 `devtools::install_github("slin30/wzMisc")`
 
-Some functions in this package depend on data.table. While the current latest version, 1.9.6, should
-suffice, I strongly suggest installing the latest dev version, using the instructions on the data.table
-page below:  
+Some functions in this package depend on data.table. Please refer to the extensive wiki
+for additional information:
 
-[data.table installation](https://github.com/Rdatatable/data.table/wiki/Installation)  
+[data.table installation](https://github.com/Rdatatable/data.table/wiki)  
 
 
