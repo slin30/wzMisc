@@ -44,6 +44,6 @@ first within \emph{xs}. If you prefer to use the opposite order (that is, least-
 multiple hits.
 }
 \examples{
-TBD
+#TBD
 }
 
