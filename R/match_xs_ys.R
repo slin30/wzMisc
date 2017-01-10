@@ -35,6 +35,7 @@
 #'
 #' @examples
 #' dtx <- data.table(A = 1:10, B = LETTERS[1:10], C = letters[1:10])
+#' # More detail forthcoming
 match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, ...) {
   stopifnot(is.data.table(dt_x) && is.data.table(dt_y))
 

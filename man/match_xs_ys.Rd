@@ -45,5 +45,6 @@ multiple hits.
 }
 \examples{
 dtx <- data.table(A = 1:10, B = LETTERS[1:10], C = letters[1:10])
+# More detail forthcoming
 }
 
