@@ -36,4 +36,8 @@ table(nchar(random_CASRN)-2) #-2 for two dashes
 table(cas_detect(unique(random_CASRN)))
 table(cas_checkSum(unique(random_CASRN)))
 }
+\seealso{
+Other CAS.functions: \code{\link{cas_checkSum}},
+  \code{\link{cas_check}}, \code{\link{cas_detect}}
+}
 

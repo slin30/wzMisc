@@ -37,14 +37,14 @@ Cascading character matching for sets of columns across two data.tables
 Addresses a common merge use case between two tables where a single, robust key is not available, and one must rely on
 one or more fields between the two tables to make a best-attempt merge. In this scenario, the order of values in \emph{xs},
 and the corresponding order in \emph{ys} is critical, and should correspond to one's best-guess (expectation) of specificity,
-since this function calls \code{Reduce} to collapse the list of match results into a single vector. The default fold direction
-for \code{Reduce} is from the left, meaning it is expected, by default, that you will list the most specific expected fields
-first within \emph{xs}. If you prefer to use the opposite order (that is, least-specific first), make sure you pass the argument
-\code{Right = TRUE} via \code{...} to \code{Reduce}, to still end up with a result that captures the most specific hit, for
-multiple hits.
+since this function calls \code{Reduce} to collapse the list of match results into a single vector.
+}
+\note{
+At the moment, this function coerces both \emph{xs} and \emph{ys} to lowercase via \code{tolower}. This is likely to be an
+option in the near future, perhaps with a default of \code{TRUE}. Additionally, \code{match} is called as
+\code{match(x, y, nomatch = NA, incomparables = NA)}, and this is enforced, with no plans to make optional.
 }
 \examples{
-dtx <- data.table(A = 1:10, B = LETTERS[1:10], C = letters[1:10])
-# More detail forthcoming
+# Real examples forthcoming
 }
 

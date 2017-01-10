@@ -2,6 +2,8 @@
 #'
 #' Simple format check for valid Chemical Abstracts Service Registry Number
 #'
+#' @family CAS functions
+#'
 #' @param x chr. A vector of values to check
 #' @param preprocess logi. Trim leading and trailing whitespace and pare all consecutive (\code{-{2,}})
 #' to (\code{-})? Defaults to \code{FALSE}. Does not carry over to return values, nor modify input in any way. See details.

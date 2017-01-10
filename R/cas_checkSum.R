@@ -2,6 +2,8 @@
 #'
 #' For a suspected CAS RN, determine validity by calculating final digit checksum
 #'
+#' @family CAS functions
+#'
 #' @param x chr. Input vector of values to check. Standard CAS notation using hyphens is fine, as
 #' all non-digit characters are stripped for checksum calculation. Each element of \emph{x} should contain
 #' only one suspected CAS RN to check.

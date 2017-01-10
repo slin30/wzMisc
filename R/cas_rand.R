@@ -2,6 +2,8 @@
 #'
 #' Make random CAS RNs of valid length format, without checksum consideration
 #'
+#' @family CAS functions
+#'
 #' @importFrom magrittr %>%
 #' @param n integer. How many random CAS RNs do you wish to generate? \code{numeric} or \code{character}
 #' input will be coerced to integer, if possible. Negative (valid) input will be transformed to
