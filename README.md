@@ -11,8 +11,7 @@ Install using devtools:
 
 `devtools::install_github("slin30/wzMisc")`
 
-Some functions in this package depend on data.table. Please refer to the extensive wiki
+Some functions in this package depend on data.table (>= 1.10.0). Please refer to the extensive wiki
 for additional information:
-Some functions in this package depend on data.table (>=1.10.0):  
 
 [data.table installation](https://github.com/Rdatatable/data.table/wiki)
