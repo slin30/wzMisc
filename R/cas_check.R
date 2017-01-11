@@ -2,7 +2,7 @@
 #'
 #' One-step check for CAS, via format and checksum; optionally preprocess input
 #'
-#' @family CAS functions
+#' @family cas_functions
 #'
 #' @param x chr. A vector of values to check. Standard CAS notation using hyphens is fine, as
 #' all non-digit characters are stripped for checksum calculation
@@ -38,8 +38,6 @@
 #' # NULL handling
 #' cas_check(c(NA, NULL, x_messy, NULL, NA)) # NULL removed, length == length(x)-length(is.null(x))
 cas_check <- function(x, preprocess = TRUE, removeWS = TRUE) {
-  # subset into this for output
-  out <- logical(length(x))
 
   if(removeWS) {
     x <- gsub("\\s", "", x)
@@ -48,8 +46,11 @@ cas_check <- function(x, preprocess = TRUE, removeWS = TRUE) {
   # The first check via cas_detect
   fmt_chk <- wzMisc::cas_detect(x, preprocess = preprocess, output = "check")
 
-  fmt_good <- which(fmt_chk[TRUE])
-  x_NA     <- which(is.na(x)) # handle NA
+  fmt_good <- which(fmt_chk[TRUE] & !is.na(fmt_chk))
+  fmt_bad  <- which(!fmt_chk & !is.na(fmt_chk))
+
+  # subset into this for output
+  out <- rep(NA, length(x))
 
   # The second check, using subset that pass first
   # Note checkLEN not needed since format checking upstream is more comprehensive
@@ -58,9 +59,9 @@ cas_check <- function(x, preprocess = TRUE, removeWS = TRUE) {
   # subset output with x that pass both checks
   out[fmt_good] <- chsum_chk
 
-  # if any NA in x, handle them here
-  if(length(x_NA) > 0L) {
-    out[x_NA] <- NA
+  #handle FALSE here
+  if(length(fmt_bad) > 0L) {
+    out[fmt_bad]  <- FALSE
   }
   out
 }

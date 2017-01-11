@@ -2,7 +2,7 @@
 #'
 #' For a suspected CAS RN, determine validity by calculating final digit checksum
 #'
-#' @family CAS functions
+#' @family cas_functions
 #'
 #' @param x chr. Input vector of values to check. Standard CAS notation using hyphens is fine, as
 #' all non-digit characters are stripped for checksum calculation. Each element of \emph{x} should contain
@@ -37,11 +37,19 @@
 #' cas_bad  <- c("61-43-2", "18323-40-9", "7732-18-4") #single digit change from good
 #' cas_checkSum(c(cas_good, cas_bad))
 cas_checkSum <- function(x, checkLEN = TRUE) {
-  stopifnot(is.character(x))
+
+  if(!is.character(x)) {
+    stop("input must be of class character")
+  }
 
   x_clean  <- gsub("\\D", "", x)
   if(checkLEN) {
     x_clean[nchar(x_clean)>10 | nchar(x_clean)<4] <- NA
+  }
+  # If no valid formats, exit early
+  if(all(is.na(x_clean))) {
+    warning("No validly formatted inputs detected")
+    return(rep(NA, length(x)))
   }
 
   checksum <- as.integer(substr(x_clean, nchar(x_clean), nchar(x_clean)))

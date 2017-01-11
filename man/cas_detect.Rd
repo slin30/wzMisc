@@ -55,7 +55,7 @@ cas_detect(toCheck, preprocess = TRUE, output = "result")
 cas_detect(gsub("[^\\\\w-]", "", toCheck, perl = TRUE), preprocess = TRUE, output = "result")
 }
 \seealso{
-Other CAS.functions: \code{\link{cas_checkSum}},
-  \code{\link{cas_check}}, \code{\link{cas_rand}}
+Other cas_functions: \code{\link{cas_checkSum}},
+  \code{\link{cas_check}}
 }
 

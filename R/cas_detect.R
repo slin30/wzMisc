@@ -2,7 +2,7 @@
 #'
 #' Simple format check for valid Chemical Abstracts Service Registry Number
 #'
-#' @family CAS functions
+#' @family cas_functions
 #'
 #' @param x chr. A vector of values to check
 #' @param preprocess logi. Trim leading and trailing whitespace and pare all consecutive (\code{-{2,}})
@@ -47,7 +47,10 @@
 #' cas_detect(gsub("[^\\w-]", "", toCheck, perl = TRUE), preprocess = TRUE, output = "result")
 
 cas_detect <- function(x, preprocess = FALSE, output = c("check", "count", "result")) {
-  stopifnot(is.character(x))
+
+  if(!is.character(x)) {
+    stop("input must be of class character")
+  }
 
   if(missing(output)) {
     output <- "check"
@@ -58,10 +61,10 @@ cas_detect <- function(x, preprocess = FALSE, output = c("check", "count", "resu
     x <- stringr::str_replace_all(x, "-{2,}", "-")
   }
 
-  n <- stringr::str_count(x, "\\d{2,7}-\\d{2}-\\d{1}")
+  n <- stringr::str_count(x, "\\d{2,7}-\\d{2}-\\d(?!\\d+)")
 
   if(output == "check") return(n > 0)
   if(output == "count") return(n)
-  else stringr::str_extract_all(x, "\\d{2,7}-\\d{2}-\\d{1}")
+  else stringr::str_extract_all(x, "\\d{2,7}-\\d{2}-\\d(?!\\d+)")
 }
 
