@@ -2,6 +2,8 @@
 #'
 #' For a suspected CAS RN, determine validity by calculating final digit checksum
 #'
+#' @importFrom stringr str_pad
+#'
 #' @family cas_functions
 #'
 #' @param x chr. Input vector of values to check. Standard CAS notation using hyphens is fine, as
@@ -55,7 +57,7 @@ cas_checkSum <- function(x, checkLEN = TRUE) {
   checksum <- as.integer(substr(x_clean, nchar(x_clean), nchar(x_clean)))
 
   maxlen  <- max(nchar(x_clean), na.rm = TRUE)
-  x_clean <- stringr::str_pad(x_clean, width = maxlen, side = "left", pad = "0")
+  x_clean <- str_pad(x_clean, width = maxlen, side = "left", pad = "0")
 
   x_split <- strsplit(substr(x_clean, 1, nchar(x_clean)-1), "") %>%
     Map(as.integer, .) %>%
