@@ -1,6 +1,6 @@
 Package: wzMisc
 Title: Miscellaneous functions by WZ
-Version: 0.1.032
+Version: 0.1.033
 Authors@R: person("Wen", "Zhang", email = "slin30@gmail.com", role = c("aut", "cre"))
 Description: Functions for a range of tasks, some of which should probably be split into
              their own package, namely the CAS (CAS-RN) functions.
@@ -9,7 +9,8 @@ Depends:
     data.table (>= 1.10.0)
 Imports:
     stringr,
-    magrittr
+    magrittr, 
+    xml2
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
