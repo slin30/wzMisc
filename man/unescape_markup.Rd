@@ -40,8 +40,8 @@ The \code{xml2} functions this relies upon are not vectorized (this is a differe
 no criticism is implied re: the functions themselves). The actual function handles vector inputs of
 length >1 through \code{vapply()}, and should maintain a reasonable level of performance by first
 subsetting only those elements of \emph{x} where \code{<.+>} is present. Therefore, if there are only
-a few elements of \emph{x} that require this function, performance should be acceptable, runtimes
-should increase on an as-needed basis.
+a few elements of \emph{x} that require this function, performance should be acceptable; runtimes
+will therefore increase on an as-needed basis, and not solely as a function of \code{length(x)}.
 }
 \examples{
 str <- "<i>in-situ</i> electron microscopy"

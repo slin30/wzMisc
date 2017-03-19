@@ -1,13 +1,14 @@
-#' Remove all columns that are all of a single value
+#' Remove all columns that match one or more critieria
 #'
-#' For a data.frame, remove all columns that satisfy a condition
+#' For a data.frame, drop all columns that satisfy a condition or set of conditions
 #'
 #' @import data.table
 #'
 #' @param df A data.frame (or data.table)
-#' @param ifallwhat A vector of value(s) to test for. \code{NA}, if included, will be dropped
+#' @param ifallwhat A vector of value(s) to test for. \code{NA}, if included, will be dropped.
+#' If not specified, defaults to a blank zero-length character, i.e. \code{""}.
 #' @param factor_as_chr If \emph{ifallwhat} is of class \code{character}, should columns of
-#' class \code{factor} be treated as character (and therefore subject to deletion as well)
+#' class \code{factor} be treated as character (and therefore subject to deletion as well)?
 #' @param drop_all_NA Should columns that are all NA be dropped? Defaults to \code{TRUE}
 #'
 #' @return A \code{data.frame}, or a \code{data.table} if this was passed to \emph{df}, with
@@ -17,7 +18,7 @@
 #' @note
 #' This function will coerce the input data.frame into a data.table via
 #' \code{\link[data.table]{as.data.table}} as an intermediate step. If a data.frame is detected
-#' as input, it will coerce the output back to a data.frame for output.
+#' as input, \code{\link[data.table]{setDF}} is used for output coercion.
 #'
 #' @export
 #'

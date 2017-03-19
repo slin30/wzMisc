@@ -2,7 +2,7 @@
 % Please edit documentation in R/remove_ifall_cols.R
 \name{remove_ifall_cols}
 \alias{remove_ifall_cols}
-\title{Remove all columns that are all of a single value}
+\title{Remove all columns that match one or more critieria}
 \usage{
 remove_ifall_cols(df, ifallwhat = NULL, factor_as_chr = TRUE,
   drop_all_NA = TRUE)
@@ -10,10 +10,11 @@ remove_ifall_cols(df, ifallwhat = NULL, factor_as_chr = TRUE,
 \arguments{
 \item{df}{A data.frame (or data.table)}
 
-\item{ifallwhat}{A vector of value(s) to test for. \code{NA}, if included, will be dropped}
+\item{ifallwhat}{A vector of value(s) to test for. \code{NA}, if included, will be dropped.
+If not specified, defaults to a blank zero-length character, i.e. \code{""}.}
 
 \item{factor_as_chr}{If \emph{ifallwhat} is of class \code{character}, should columns of
-class \code{factor} be treated as character (and therefore subject to deletion as well)}
+class \code{factor} be treated as character (and therefore subject to deletion as well)?}
 
 \item{drop_all_NA}{Should columns that are all NA be dropped? Defaults to \code{TRUE}}
 }
@@ -23,12 +24,12 @@ all columns that match the requirements within \emph{ifallwhat} removed. If no c
 in \emph{df} met the criteria requested, then the input is returned without modification.
 }
 \description{
-For a data.frame, remove all columns that satisfy a condition
+For a data.frame, drop all columns that satisfy a condition or set of conditions
 }
 \note{
 This function will coerce the input data.frame into a data.table via
 \code{\link[data.table]{as.data.table}} as an intermediate step. If a data.frame is detected
-as input, it will coerce the output back to a data.frame for output.
+as input, \code{\link[data.table]{setDF}} is used for output coercion.
 }
 \examples{
 my_df <- data.frame(
