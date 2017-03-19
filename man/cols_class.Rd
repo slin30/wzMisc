@@ -35,4 +35,3 @@ find_fct <- cols_class("factor")
 find_chr.fct <- cols_class(c("character", "factor"))
 find_chr.fct_alt <- cols_class("character", "factor") #same
 }
-

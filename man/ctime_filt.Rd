@@ -42,4 +42,3 @@ x <- list.files(R.home("doc"), full.names = TRUE)
 ctime_filt(x) #use defaults
 ctime_filt(x, pattern = ".html|.png", type = "max")
 }
-

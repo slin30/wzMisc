@@ -48,4 +48,3 @@ cas_checkSum(c(cas_good, cas_bad))
 Other cas_functions: \code{\link{cas_check}},
   \code{\link{cas_detect}}
 }
-

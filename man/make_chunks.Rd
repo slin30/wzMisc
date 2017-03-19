@@ -85,4 +85,3 @@ make_chunks(10, 10) # works, but not much point
 make_chunks(10, 10, limit = 2.1) # also works, but now there is a point
 }
 }
-

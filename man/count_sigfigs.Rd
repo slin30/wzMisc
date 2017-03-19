@@ -84,4 +84,3 @@ count_sigfigs(123.12345679, digits = 16) #probably not what you expected
 count_sigfigs(1000000001.12345, digits = 15) #pushing it
 }
 }
-

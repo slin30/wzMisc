@@ -2,6 +2,7 @@
 % Please edit documentation in R/depth.R
 \name{depth}
 \alias{depth}
+\alias{depth}
 \alias{depth_while}
 \title{depth}
 \usage{
@@ -41,4 +42,3 @@ depth(list(list(1:3)))
 depth(list(1:3, "a", list(1:2)))
 depth(list(1:3, "a", list(list(1:2))))
 }
-

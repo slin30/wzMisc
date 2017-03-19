@@ -20,7 +20,7 @@
 #'
 #' @note
 #' The standalone functions are natively vectorized, and since this encompasses the full functionality of
-#' \link[webchem]{is.cas}, it is arguably a \emph{vectorized} alternative.
+#' \code{\link[webchem]{is.cas}}, it is arguably a \emph{vectorized} alternative.
 #'
 #' @return
 #' A \code{logical} vector of length \emph{x} denoting whether each \emph{x} is a valid CAS by both

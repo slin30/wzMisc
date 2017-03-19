@@ -35,4 +35,3 @@ x <- signif(x, 2)
 x[1] == mode_stat(x) #better, but note about ties applies
 }
 }
-

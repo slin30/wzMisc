@@ -46,4 +46,3 @@ with_args(problemFUN, arg1 = 1, 2) #no error, but ugly
 with_args(mean, 1:10, TRUE) #error, don't rely on positional matching!
 }
 }
-

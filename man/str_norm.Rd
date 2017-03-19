@@ -48,4 +48,3 @@ str_norm(1:10, "\\\\d", "-")
 str_norm(x) #will try to use default pattern and replacement. Read the error message!
 }
 }
-

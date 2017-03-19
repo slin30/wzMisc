@@ -58,4 +58,3 @@ cas_detect(gsub("[^\\\\w-]", "", toCheck, perl = TRUE), preprocess = TRUE, outpu
 Other cas_functions: \code{\link{cas_checkSum}},
   \code{\link{cas_check}}
 }
-

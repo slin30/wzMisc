@@ -47,4 +47,3 @@ should increase on an as-needed basis.
 str <- "<i>in-situ</i> electron microscopy"
 unescape_markup(str)
 }
-

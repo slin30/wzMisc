@@ -47,4 +47,3 @@ option in the near future, perhaps with a default of \code{TRUE}. Additionally, 
 \examples{
 # Real examples forthcoming
 }
-

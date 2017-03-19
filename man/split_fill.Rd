@@ -58,4 +58,3 @@ dt[, targ_additional := targ]
 head(split_fill(dat = dt, targ = "targ", split_on = "\\\\|", IDcol = "ID", rebind = TRUE))
 
 }
-

@@ -33,4 +33,3 @@ reverse_lookup(bad_list) #error
 reverse_lookup(unlist(bad_list)) #no error, but probably not what you intended
 }
 }
-
