@@ -2,8 +2,8 @@
 [![Build Status](https://travis-ci.org/slin30/wzMisc.svg?branch=master)](https://travis-ci.org/slin30/wzMisc)  
 
 
-##Miscellaneous functions package
-###Version 0.1.033
+## Miscellaneous functions package
+### Version 0.1.034
 
 This is the initial release suitable for public consumption. 
 
