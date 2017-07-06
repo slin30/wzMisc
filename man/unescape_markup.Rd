@@ -4,16 +4,16 @@
 \alias{unescape_markup}
 \title{Clean up xml or html markup tags and formatting}
 \usage{
-unescape_markup(x, what_ml = c("html", "xml"), toASCII = FALSE, ...)
+unescape_markup(x, what_ml = c("html", "xml"), iconv_encoding = FALSE, ...)
 }
 \arguments{
 \item{x}{A character; the input you wish to unescape}
 
 \item{what_ml}{One of \code{xml, html} to denote if content should be handled as such. Defaults to \code{html}}
 
-\item{toASCII}{A logical vector of length 1. Should the input be encoded as ASCII via \code{iconv}?}
+\item{iconv_encoding}{A logical vector of length 1. Should the input be processed via \code{iconv}?}
 
-\item{...}{Optional. Additional args to \code{iconv} and used when \emph{toASCII} is \code{TRUE}}
+\item{...}{Optional. Additional args to \code{iconv} and used when \emph{iconv_encoding} is \code{TRUE}}
 }
 \value{
 A character vector the same length of \emph{x}, with \code{<x>} unescaped. If no unescaping was
@@ -27,10 +27,11 @@ and all credit is due.
 This function will call either \code{\link[xml2]{read_xml}} or \code{\link[xml2]{read_html}},
 depending on the value passed to the argument. The default, if not specified, is \code{html}.
 
-If called with \emph{toASCII} == \code{TRUE}, \emph{x} is processed by \code{\link{iconv}},
+If called with \emph{iconv_encoding} == \code{TRUE}, \emph{x} is processed by \code{\link{iconv}},
 which may or may not change \emph{x}. In both the spirit of minimizing surprises, and with
 particular note to the potential of an early return if no unescaping is
-required, \emph{toASCII} is \code{FALSE} by default.
+required, \emph{iconv_encoding} is \code{FALSE} by default, and therefore any args that
+would be passed to \code{iconv()} via \code{...} are ignored.
 }
 \details{
 Useful when dealing with '< >' enclosed parts of strings in a vector
