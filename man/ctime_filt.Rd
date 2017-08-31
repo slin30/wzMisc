@@ -4,8 +4,8 @@
 \alias{ctime_filt}
 \title{Filter files by ctime}
 \usage{
-ctime_filt(x, pattern, type = c("max", "min"), fmt = "\%Y-\%m-\%d",
-  print_limit = 6L, ...)
+ctime_filt(x, pattern, type = c("max", "min"), only_last = TRUE,
+  fmt = "\%Y-\%m-\%d", print_limit = 6L, ...)
 }
 \arguments{
 \item{x}{Input file path}
@@ -14,6 +14,8 @@ ctime_filt(x, pattern, type = c("max", "min"), fmt = "\%Y-\%m-\%d",
 
 \item{type}{One of "min" or "max" (quotes explicit) to denote if function should find
 earliest or latest file by creation time, respectively. Defaults to "max" (most recent file(s))}
+
+\item{only_last}{Should only the last file found be returned? Defaults to \code{TRUE}}
 
 \item{fmt}{\code{character} date format for ctime transformation. Defaults to \%Y-\%m-\%d}
 
@@ -33,8 +35,9 @@ Identify earliest or latest file(s) by creation time
 This is most useful for filtering out multiple files with similar or identical file names within a single parent
 dir, regardless of nesting, by ctime as denoted by file.info.
 
-Beware if using directly for reading-in, as this function will list all files found according to input criteria;
-you should apply additional constraints for non-interactive use, e.g. specifying a more specific path and/or
+Beware if using directly for reading-in, as this function will list all files found according to input criteria,
+although it will also return only the last file found, by default. Nonetheless, you should
+apply additional constraints for non-interactive use, e.g. specifying a more specific path and/or
 pattern.
 }
 \examples{
