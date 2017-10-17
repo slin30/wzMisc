@@ -2,10 +2,11 @@
 % Please edit documentation in R/ctime_filt.R
 \name{ctime_filt}
 \alias{ctime_filt}
-\title{Filter files by ctime}
+\title{Filter files by c/m/atime}
 \usage{
-ctime_filt(x, pattern, type = c("max", "min"), only_last = TRUE,
-  fmt = "\%Y-\%m-\%d", print_limit = 6L, ...)
+ctime_filt(x, pattern, type = c("max", "min"), what_finfo = c("ctime",
+  "mtime", "atime"), only_last = TRUE, fmt = "\%Y-\%m-\%d",
+  print_limit = 6L, ...)
 }
 \arguments{
 \item{x}{Input file path}
@@ -13,7 +14,10 @@ ctime_filt(x, pattern, type = c("max", "min"), only_last = TRUE,
 \item{pattern}{Optional regex passed to \code{list.files} pattern arg; defaults to \code{.*} (any).}
 
 \item{type}{One of "min" or "max" (quotes explicit) to denote if function should find
-earliest or latest file by creation time, respectively. Defaults to "max" (most recent file(s))}
+earliest or latest file by file.info file time, respectively. Defaults to "max" (most recent file(s));
+see \emph{what_finfo}.}
+
+\item{what_finfo}{What file.info field type should be used for filtering? Defaults to \code{ctime}.}
 
 \item{only_last}{Should only the last file found be returned? Defaults to \code{TRUE}}
 
@@ -29,11 +33,12 @@ A vector of files (full path names) that meet the type criteria (earliest or lat
 within the scope of the specified dir.
 }
 \description{
-Identify earliest or latest file(s) by creation time
+Identify earliest or latest file(s) by creation/modified/access time
 }
 \details{
 This is most useful for filtering out multiple files with similar or identical file names within a single parent
-dir, regardless of nesting, by ctime as denoted by file.info.
+dir, regardless of nesting, by one of \code{ctime,mtime,atime} as denoted by file.info. By default, the timestamp
+used is \code{ctime}.
 
 Beware if using directly for reading-in, as this function will list all files found according to input criteria,
 although it will also return only the last file found, by default. Nonetheless, you should

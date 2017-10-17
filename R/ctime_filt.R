@@ -1,10 +1,12 @@
-#' Filter files by ctime
+#' Filter files by c/m/atime
 #'
-#' Identify earliest or latest file(s) by creation time
+#' Identify earliest or latest file(s) by creation/modified/access time
 #' @param x Input file path
 #' @param pattern Optional regex passed to \code{list.files} pattern arg; defaults to \code{.*} (any).
 #' @param type One of "min" or "max" (quotes explicit) to denote if function should find
-#' earliest or latest file by creation time, respectively. Defaults to "max" (most recent file(s))
+#' earliest or latest file by file.info file time, respectively. Defaults to "max" (most recent file(s));
+#' see \emph{what_finfo}.
+#' @param what_finfo What file.info field type should be used for filtering? Defaults to \code{ctime}.
 #' @param only_last Should only the last file found be returned? Defaults to \code{TRUE}
 #' @param fmt \code{character} date format for ctime transformation. Defaults to \%Y-\%m-\%d
 #' @param print_limit Optional integer. How many found results should be printed?
@@ -12,7 +14,8 @@
 #' @param ... Other arguments to pass to list.files, aside from \code{pattern}
 #' @details
 #' This is most useful for filtering out multiple files with similar or identical file names within a single parent
-#' dir, regardless of nesting, by ctime as denoted by file.info.
+#' dir, regardless of nesting, by one of \code{ctime,mtime,atime} as denoted by file.info. By default, the timestamp
+#' used is \code{ctime}.
 #'
 #' Beware if using directly for reading-in, as this function will list all files found according to input criteria,
 #' although it will also return only the last file found, by default. Nonetheless, you should
@@ -26,10 +29,12 @@
 #' x <- list.files(R.home("doc"), full.names = TRUE)
 #' ctime_filt(x) #use defaults
 #' ctime_filt(x, pattern = ".html|.png", type = "max")
-ctime_filt <- function(x, pattern, type = c("max", "min"), only_last = TRUE, fmt = "%Y-%m-%d", print_limit = 6L, ...) {
+ctime_filt <- function(x, pattern, type = c("max", "min"),
+                       what_finfo = c("ctime", "mtime", "atime"),
+                       only_last = TRUE, fmt = "%Y-%m-%d",
+                       print_limit = 6L, ...) {
 
   if(missing(type)) {
-    message("Type arg missing; defaulting to max")
     type <- "max"
   }
 
@@ -37,8 +42,12 @@ ctime_filt <- function(x, pattern, type = c("max", "min"), only_last = TRUE, fmt
     pattern = ".*"
   }
 
+  if(missing(what_finfo)) {
+    what_finfo <- "ctime"
+  }
+
   files <- list.files(x, full.names = TRUE, pattern = pattern, ...)
-  finfo <- file.info(files)[["ctime"]]
+  finfo <- file.info(files)[[what_finfo]]
   targ  <- match.fun(type)(as.Date(format(finfo, fmt)))
 
   note <- switch(type,
