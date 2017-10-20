@@ -53,7 +53,7 @@ make_ftp_params <- function(host, protocol = "ftp", user = NULL, pwd = NULL) {
   url <- paste0(protocol_clean, "://", host)
 
   userpwd <- NULL
-  if(any(.null_or_blank(user), .null_or_blank(pwd))) {
+  if(!any(.null_or_blank(user), .null_or_blank(pwd))) {
     userpwd <- paste(user, pwd, sep = ":")
   }
 
