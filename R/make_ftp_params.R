@@ -47,7 +47,7 @@ make_ftp_params <- function(host, protocol = "ftp", user = NULL, pwd = NULL) {
   protocol_clean <- gsub("[^[:alnum:]]", "", tolower(protocol))
 
   host <- tolower(host)
-  host <- gsub(":|/", "", host)
+  host <- gsub(paste0("^", protocol_clean, "://"), "", host)
   host <- gsub(paste0("^(", protocol_clean, "){2,}"), protocol_clean, host)
 
   url <- paste0(protocol_clean, "://", host)
