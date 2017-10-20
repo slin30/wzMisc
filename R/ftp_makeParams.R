@@ -22,27 +22,27 @@
 #'
 #' @examples
 #' # with authentication
-#' make_ftp_params(host = "ftp.123.com", user = "myself", pwd = "my_pwd")
+#' ftp_makeParams(host = "ftp.123.com", user = "myself", pwd = "my_pwd")
 #'
 #' # NULL or blank for either of user or pwd will result in NULL userpwd
-#' make_ftp_params(host = "ftp.123.com", user = "myself", pwd = " ")
+#' ftp_makeParams(host = "ftp.123.com", user = "myself", pwd = " ")
 #'
 #' # host and protocol input normalization
-#' x0 <- make_ftp_params(host = "ftp.123.com", protocol = "ftp" )
-#' x1 <- make_ftp_params(host = "ftp://ftp.123.com", protocol = "ftp")
-#' x2 <- make_ftp_params(host = "ftp://ftp.123.com", protocol = "ftp://")
-#' x3 <- make_ftp_params(host = "ftp://ftp.123.com")
+#' x0 <- ftp_makeParams(host = "ftp.123.com", protocol = "ftp" )
+#' x1 <- ftp_makeParams(host = "ftp://ftp.123.com", protocol = "ftp")
+#' x2 <- ftp_makeParams(host = "ftp://ftp.123.com", protocol = "ftp://")
+#' x3 <- ftp_makeParams(host = "ftp://ftp.123.com")
 #'
 #' all(sapply(list(x1, x2, x3), function(f) identical(x0, f)))
 #'
 #' # If you wanted to get a listing of all files:
 #' \dontrun{
 #' library(RCurl)
-#' my_params <- make_ftp_params(host = "ftp.123.com", user = "myself", pwd = "my_pwd")
+#' my_params <- ftp_makeParams(host = "ftp.123.com", user = "myself", pwd = "my_pwd")
 #' my_params$ftplistonly <- TRUE
 #' do.call(getURL, my_params)
 #' }
-make_ftp_params <- function(host, protocol = "ftp", user = NULL, pwd = NULL) {
+ftp_makeParams <- function(host, protocol = "ftp", user = NULL, pwd = NULL) {
 
   protocol_clean <- gsub("[^[:alnum:]]", "", tolower(protocol))
 
