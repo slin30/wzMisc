@@ -10,7 +10,8 @@ Depends:
 Imports:
     stringr,
     magrittr, 
-    xml2
+    xml2,
+    RCurl
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

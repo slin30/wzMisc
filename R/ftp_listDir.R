@@ -2,6 +2,8 @@
 #'
 #' For a specific ftp endpoint, list all top-level files and/or directories
 #'
+#' @importFrom RCurl getURL
+#'
 #' @family ftp_functions
 #'
 #' @param arglist (reqiured) A list of parameters to pass to \code{\link[RCurl]{getURL}},
