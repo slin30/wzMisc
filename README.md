@@ -3,7 +3,7 @@
 
 
 ## Miscellaneous functions package
-### Version 0.1.037
+### Version 0.1.038
 
 This is the initial release suitable for public consumption. 
 

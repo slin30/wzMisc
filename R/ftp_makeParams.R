@@ -2,6 +2,8 @@
 #'
 #' Create url strings and, optionally, authentication parameters for FTP endpoint interactions
 #'
+#' @family ftp_functions
+#'
 #' @param host (required) The host address string. Should take the form of \code{ftp.your_host.com}
 #' @param protocol (optional) The protocol to use; defaults to \code{ftp}
 #' @param user (optional) User login name, if host access requires authentication. If provided, \emph{pwd}

@@ -53,3 +53,6 @@ my_params$ftplistonly <- TRUE
 do.call(getURL, my_params)
 }
 }
+\seealso{
+Other ftp_functions: \code{\link{ftp_listDir}}
+}
