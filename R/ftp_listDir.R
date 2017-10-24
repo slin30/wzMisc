@@ -12,8 +12,12 @@
 #' is no longer considered a file. Defaults to \code{3L}.
 #'
 #' @return
-#' A \code{list} of length 2, each element itself \code{list} of directories and files, respectively. If
-#' no valid values exist for either top-level return element, then \code{NULL}.
+#' A \code{list} of length 3, the first two elements each a \code{list} of directories and files, respectively. If
+#' no valid values exist for either top-level return element, then \code{NULL}. The last element contains the
+#' root (host) url.
+#'
+#' If present, files will have the parent directory appended as a name. Files that exist at the root level will
+#' be named with the input url.
 #' @export
 #'
 #' @examples
@@ -42,20 +46,31 @@ ftp_listDir <- function(arglist, ncharlim = 3L) {
   arglist[["ftplistonly"]] <- TRUE
   arglist[["crlf"]] <- TRUE
 
+
   res <- do.call(getURL, arglist)
 
   server_paths <- unlist(strsplit(res, split = "\r\n"))
 
-  is_file <- server_paths[.has_file_ext(server_paths, ncharlim = ncharlim)]
-  is_dir  <- server_paths[!.has_file_ext(server_paths, ncharlim = ncharlim)]
+  is_file <- as.list(server_paths[.has_file_ext(server_paths, ncharlim = ncharlim)])
+  is_dir  <- as.list(server_paths[!.has_file_ext(server_paths, ncharlim = ncharlim)])
 
-  if(!is.null(is_dir)) {
-    is_dir <- paste0(arglist[["url"]], "/", is_dir, "/")
+  # if no dir, then files inherit basename of parent as upper level
+  # if dir and file, then files inherit basename of parent as upper level
+  # if dir and no file, then do nothing
+
+  # use this later for naming files
+  url_parsed <- unlist(strsplit(arglist[["url"]], split = "/{1,}"))
+  if(length(is_file) > 0L) {
+    is_file <- setNames(is_file, rep(tail(url_parsed, 1), length(is_file)))
   }
 
-  list(is_dir = as.list(is_dir),
-       is_file = as.list(is_file)
+  out <- list(dirs = is_dir,
+              files = is_file,
+              root_url = url_parsed[[1]]
   )
+
+  lapply(out, .zeroLenToNull)
+
 }
 
 
@@ -65,4 +80,11 @@ NULL
   reg_ex <- paste0("\\..{1,", ncharlim, "}$")
   out <- grepl(reg_ex, x)
   out[!out == ""]
+}
+
+.zeroLenToNull <- function(x) {
+  if(length(x) > 0L) {
+    return(x)
+  }
+  list(NULL)
 }

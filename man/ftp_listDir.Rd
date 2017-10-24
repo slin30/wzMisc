@@ -14,8 +14,12 @@ containing at minimum \code{url}.}
 is no longer considered a file. Defaults to \code{3L}.}
 }
 \value{
-A \code{list} of length 2, each element itself \code{list} of directories and files, respectively. If
-no valid values exist for either top-level return element, then \code{NULL}.
+A \code{list} of length 3, the first two elements each a \code{list} of directories and files, respectively. If
+no valid values exist for either top-level return element, then \code{NULL}. The last element contains the
+root (host) url.
+
+If present, files will have the parent directory appended as a name. Files that exist at the root level will
+be named with the input url.
 }
 \description{
 For a specific ftp endpoint, list all top-level files and/or directories
