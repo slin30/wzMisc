@@ -10,10 +10,14 @@
 #' must also be a valid string
 #' @param pwd (optional) User password, if host access requires authentication. If provided, \emph{user}
 #' must also be a valid string
+#' @param extras (optional) Additional arguments to pass to output. If provided, must be a named
+#' vector.
 #'
 #' @return
-#' A named list of length 2, containing the \code{url} and \code{userpwd}.
+#' If \emph{extras} are not supplied, a named list of length 2, containing the \code{url} and \code{userpwd}.
 #' If either \emph{user} or \emph{pwd} are missing OR are blank, the second element will be \code{NULL}.
+#'
+#' If \emph{extras} are supplied, a named list of length 2 plus \code{length(extras)}.
 #' @export
 #'
 #' @details
@@ -44,7 +48,7 @@
 #' my_params$ftplistonly <- TRUE
 #' do.call(getURL, my_params)
 #' }
-ftp_makeParams <- function(host, protocol = "ftp", user = NULL, pwd = NULL) {
+ftp_makeParams <- function(host, protocol = "ftp", user = NULL, pwd = NULL, extras = NULL) {
 
   protocol_clean <- gsub("[^[:alnum:]]", "", tolower(protocol))
 
@@ -59,7 +63,17 @@ ftp_makeParams <- function(host, protocol = "ftp", user = NULL, pwd = NULL) {
     userpwd <- paste(user, pwd, sep = ":")
   }
 
-  list(url = url, userpwd = userpwd)
+  out <- list(url = url, userpwd = userpwd)
+  if(!is.null(extras)) {
+    if(length(unique(names(extras))) != length(extras)) {
+      stop(substitute(extras), " must be a uniquely named vector or list")
+    }
+    if(is.atomic(extras)) {
+      extras <- as.list(extras)
+    }
+    out <- c(out, extras)
+  }
+  out
 }
 
 NULL

@@ -4,7 +4,8 @@
 \alias{ftp_makeParams}
 \title{Construct params to interact with an FTP endpoint}
 \usage{
-ftp_makeParams(host, protocol = "ftp", user = NULL, pwd = NULL)
+ftp_makeParams(host, protocol = "ftp", user = NULL, pwd = NULL,
+  extras = NULL)
 }
 \arguments{
 \item{host}{(required) The host address string. Should take the form of \code{ftp.your_host.com}}
@@ -16,10 +17,15 @@ must also be a valid string}
 
 \item{pwd}{(optional) User password, if host access requires authentication. If provided, \emph{user}
 must also be a valid string}
+
+\item{extras}{(optional) Additional arguments to pass to output. If provided, must be a named
+vector.}
 }
 \value{
-A named list of length 2, containing the \code{url} and \code{userpwd}.
+If \emph{extras} are not supplied, a named list of length 2, containing the \code{url} and \code{userpwd}.
 If either \emph{user} or \emph{pwd} are missing OR are blank, the second element will be \code{NULL}.
+
+If \emph{extras} are supplied, a named list of length 2 plus \code{length(extras)}.
 }
 \description{
 Create url strings and, optionally, authentication parameters for FTP endpoint interactions
@@ -54,5 +60,6 @@ do.call(getURL, my_params)
 }
 }
 \seealso{
-Other ftp_functions: \code{\link{ftp_listDir}}
+Other ftp_functions: \code{\link{ftp_listDir}},
+  \code{\link{ftp_parseMeta}}
 }

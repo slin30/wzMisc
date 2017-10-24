@@ -4,11 +4,13 @@
 \alias{ftp_listDir}
 \title{List files and/or directories within an ftp endpoint}
 \usage{
-ftp_listDir(arglist, ncharlim = 3L)
+ftp_listDir(arglist, include_fileInfo = TRUE, ncharlim = 3L)
 }
 \arguments{
 \item{arglist}{(reqiured) A list of parameters to pass to \code{\link[RCurl]{getURL}},
 containing at minimum \code{url}.}
+
+\item{include_fileInfo}{(optional) Try to get file information, if files are found? Defaults to \code{TRUE}}
 
 \item{ncharlim}{(optional) Number of terminal characters after a dot, beyond which a character vector
 is no longer considered a file. Defaults to \code{3L}.}
@@ -32,5 +34,6 @@ ftp_listDir(my_arglist)
 }
 }
 \seealso{
-Other ftp_functions: \code{\link{ftp_makeParams}}
+Other ftp_functions: \code{\link{ftp_makeParams}},
+  \code{\link{ftp_parseMeta}}
 }
