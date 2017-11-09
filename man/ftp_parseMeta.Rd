@@ -23,10 +23,12 @@ fields, plus the input (so nine total). Fields include:
 \item \code{owner_group} (chr); a \code{space}-delimited vector denoting the owner and group
 \item \code{size} (dbl); for a \code{file}, the size in bytes. This may not be meaningful for
       directories.
+\item \code{name} (chr); the name of the asset; if a file, will include the extension.
+\item \code{mod_time} (chr); the time of the \emph{mod_date}
 \item \code{mod_date} (chr); the date, possibly only the three-letter month, \code{space} date (of month)
       if the last modification date is less than 6 months from the current date (of the endpoint).
-\item \code{mod_time} (chr); the time of the \emph{mod_date}
-\item \code{name} (chr); the name of the asset; if a file, will include the extension.
+\item \code{mod_year} (int): the last modified year. This information is not included for files that are
+      created in the current year, and so is inferred in such cases to the current year.
 }
 
 If \emph{ret} could not be parsed at all, i.e. if all \code{NA}, then the input is returned

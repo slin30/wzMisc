@@ -20,10 +20,12 @@
 #' \item \code{owner_group} (chr); a \code{space}-delimited vector denoting the owner and group
 #' \item \code{size} (dbl); for a \code{file}, the size in bytes. This may not be meaningful for
 #'       directories.
+#' \item \code{name} (chr); the name of the asset; if a file, will include the extension.
+#' \item \code{mod_time} (chr); the time of the \emph{mod_date}
 #' \item \code{mod_date} (chr); the date, possibly only the three-letter month, \code{space} date (of month)
 #'       if the last modification date is less than 6 months from the current date (of the endpoint).
-#' \item \code{mod_time} (chr); the time of the \emph{mod_date}
-#' \item \code{name} (chr); the name of the asset; if a file, will include the extension.
+#' \item \code{mod_year} (int): the last modified year. This information is not included for files that are
+#'       created in the current year, and so is inferred in such cases to the current year.
 #' }
 #'
 #' If \emph{ret} could not be parsed at all, i.e. if all \code{NA}, then the input is returned
@@ -56,7 +58,7 @@ ftp_parseMeta <- function(ret) {
     owner_group = "(\\d+\\s+\\d+)",
     size = "(\\d+)",
     mod_date = "([A-Z][a-z]{2}\\s+\\d+)",
-    mod_time = "(\\d+:\\d+)",
+    mod_time = "(\\d+:\\d+|\\d{4})",
     name = "(.*$)"
   )
 
@@ -74,6 +76,23 @@ ftp_parseMeta <- function(ret) {
 
   out[["size"]] <- as.numeric(out[["size"]])
   out[["type_code"]] <- as.integer(out[["type_code"]])
-  out
 
+  setcolorder(out, c(setdiff(names(out), c("mod_date", "mod_time")),
+                     c("mod_time", "mod_date"))
+  )
+
+  # handle implied year
+  time_col <- out[["mod_time"]]
+  is_time <- grepl("\\d+:\\d+", time_col)
+
+  year_vec <- rep(year(Sys.time()), length(time_col))
+  time_vec <- time_col
+
+  time_vec[!is_time] <- NA_character_
+  year_vec[!is_time] <- time_col[!is_time]
+
+  out[["mod_time"]] <- time_vec
+  out[["mod_year"]] <- year_vec
+
+  out
 }
