@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_ref_unique.R
 \name{make_ref_unique}
 \alias{make_ref_unique}
-\title{Nake a lookup vector consisting of unique elements after applying fun}
+\title{Make a lookup vector consisting of unique elements after applying fun}
 \usage{
 make_ref_unique(x, dropNA = TRUE, fun, ...)
 }
@@ -27,7 +27,11 @@ For a vector x, apply fun and output result, named by unique x
 \details{
 This is a convenient way to create lookup vectors, that can be used to transform the
 original vector via character subscripting, which can be more efficient (in some cases
-sigficantly) than applying the transformation on the input directly.
+significantly) than applying the transformation on the input directly.
+
+The (any) improvement in performance is highly dependent on the complexity of the
+operation (\code{fun} and any parameters defined within \code{...}), as well as the length and
+cardinality of \code{x}.
 }
 \note{
 \code{fun} should be passed as an explicitly named argument, i.e. \code{fun="gsub"} due to the
@@ -42,9 +46,9 @@ vec_x <- rep(
   replicate(1E4,
             paste0(
               paste(sample(LETTERS[1:4], 3, replace = TRUE), collapse = ""),
-              sample(100L:110L, 1)
+              sample(100L:1000L, 1)
             )),
-  100
+  200
 )
 
 # using a lookup table to subscript
