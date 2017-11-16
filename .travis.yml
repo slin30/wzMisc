@@ -1,5 +1,8 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
+# Remove the MongoDB repo as their GPG key has expired.
+sudo rm /etc/apt/sources.list.d/mongodb-3.2.list
+
 language: R
 sudo: false
 cache: packages
