@@ -2,7 +2,7 @@
 % Please edit documentation in R/sevenzip_makecmd.R
 \name{sevenzip_makecmd}
 \alias{sevenzip_makecmd}
-\title{WINDOWS ONLY - Create commands to perform system calls with 7-zip}
+\title{Create commands to perform system calls with 7-zip}
 \usage{
 sevenzip_makecmd(action = NULL, target = NULL, output = NULL,
   extras = NULL, verbose = TRUE)
@@ -31,8 +31,9 @@ Helper to construct argument lists to use with system2, to invoke 7-zip commands
 }
 \details{
 This is simply a call-construction helper that also checks for the presence of 7-zip in
-your PATH. It does not invoke any system calls beyond said check. There is also minimal
-validation, meaning that it is possible to construct invalid calls.
+your PATH on Windows systems. It does not invoke any system calls beyond said
+check (and no check is performed on a non-Windows OS. There is also minimal validation,
+meaning that it is possible to construct invalid calls.
 
 The inputs to \emph{target, output} are automatically reversed for archive
 actions, i.e. \code{a, u}. This is done to ensure that the semantic intent of the
@@ -41,6 +42,8 @@ arguments is consistent with the actual command ordering. For any actions other 
 as-is.
 }
 \note{
+There is no guarantee that this will generate valid commands for a non-Windows OS.
+
 The main purpose of this function is to make it easier to construct syntactically valid
 commands, and the main audience comprises those who are not already fluent in invoking
 7-zip from the command line, but need to use some of its capabilities programatically.
@@ -85,5 +88,7 @@ unlink(paste(my_tempdir, "extracted", sep = "/"), recursive = TRUE)
 }
 }
 \seealso{
-Other sevenzip functions: \code{\link{sevenzip_checkpath}}
+Other sevenzip functions: \code{\link{sevenzip_checkpath}},
+  \code{\link{sevenzip_listcont}},
+  \code{\link{sevenzip_parseinfo}}
 }

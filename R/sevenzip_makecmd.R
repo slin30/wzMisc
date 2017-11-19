@@ -1,4 +1,4 @@
-#' WINDOWS ONLY - Create commands to perform system calls with 7-zip
+#' Create commands to perform system calls with 7-zip
 #'
 #' Helper to construct argument lists to use with system2, to invoke 7-zip commands
 #'
@@ -15,8 +15,9 @@
 #'
 #' @details
 #' This is simply a call-construction helper that also checks for the presence of 7-zip in
-#' your PATH. It does not invoke any system calls beyond said check. There is also minimal
-#' validation, meaning that it is possible to construct invalid calls.
+#' your PATH on Windows systems. It does not invoke any system calls beyond said
+#' check (and no check is performed on a non-Windows OS. There is also minimal validation,
+#' meaning that it is possible to construct invalid calls.
 #'
 #' The inputs to \emph{target, output} are automatically reversed for archive
 #' actions, i.e. \code{a, u}. This is done to ensure that the semantic intent of the
@@ -24,8 +25,9 @@
 #' \code{archive, update}, the values passed to \emph{target, output} are passed through
 #' as-is.
 #'
-#'
 #' @note
+#' There is no guarantee that this will generate valid commands for a non-Windows OS.
+#'
 #' The main purpose of this function is to make it easier to construct syntactically valid
 #' commands, and the main audience comprises those who are not already fluent in invoking
 #' 7-zip from the command line, but need to use some of its capabilities programatically.
@@ -80,10 +82,15 @@ sevenzip_makecmd <- function(action = NULL, target = NULL, output = NULL, extras
   sys_call <- "7z"
   extras <- paste(extras, collapse = " ")
 
-  if(!sevenzip_checkpath(sys_call)) {
-    stop("7z not found in PATH variable.
+  # only check PATH on Windows
+  is_windows <- .Platform$OS.type == "windows"
+
+  if(is_windows) {
+    if(!sevenzip_checkpath(sys_call)) {
+      stop("7z not found in PATH variable.
          Please add this environment variable to 'path' and re-try\n",
-         "Usually this will be 'C:\\\\Program Files\\\\7-zip'")
+           "Usually this will be 'C:\\\\Program Files\\\\7-zip'")
+    }
   }
 
   if(is.null(target)) {
