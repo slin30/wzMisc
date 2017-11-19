@@ -1,12 +1,21 @@
-#' Extract key metadata from common 7-zip archives
+#' Parse key metadata from common 7-zip archives
 #'
+#' Extract the name and size of each file from a 7-zip listing
+#'
+#' @importFrom stringr str_locate str_sub str_extract
 #' @family sevenzip functions
 #'
 #' @param x A valid return from a (captured) call to 7-zip with an
 #'          action of \code{l} (\code{list})
 #'
+#' @details
+#' This is mainly used as a helper for \code{\link{sevenzip_listcont}}. The expected
+#' input is a single listing from a 7-zip return, i.e. a call to 7-zip with an action of
+#' \code{l}.
+#'
 #' @return
 #' A \code{data.frame}
+#'
 #' @export
 #'
 #' @examples

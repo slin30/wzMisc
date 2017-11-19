@@ -17,17 +17,28 @@ sevenzip_listcont(archive_path, extras = NULL, recursive = FALSE,
 \item{parse}{Parse the raw return via \code{\link{sevenzip_parseinfo}}? Defaults to \code{TRUE}}
 }
 \value{
-By default, a \code{data.frame} with the full path, archive name, and
-size of the file in KB, for each file within the first-level hierarchy of
-each archive found within \code{archive_path}. If parsing failed, of if
-no parsing is requested, a \code{list} containing the raw text output.
+By default, a \code{list} of length 2:
+
+\itemize{
+\item \code{success} A \code{list}; if no valid archive contents could be accessed, then an
+      empty \code{list} of length 1, otherwise, of length 2:
+    \itemize{
+        \item  \code{is_parseable}: A \code{data.frame} of successfully parsed items, unless no items
+               were parseable, in which case an empty list, i.e. \code{list()}
+        \item \code{not_parseable}: A \code{list} of unparseable items, containing the raw text output;
+               if none, then an empty list, i.e. \code{list()}
+             }
+\item \code{failure} A \code{list} of archives where 7-zip could not access any files within.
+}
+
+If \code{parse=FALSE}, then a \code{list} of raw output
 }
 \description{
 List the contents of one or more valid file 7-zip extensions in a directory
 }
 \details{
-Valid file extensions include \code{7z, zip, rar, gzip, rar, gzip, tar, bzip2, gz, tar.gz}.
-File (directory) listing is performed with a (non-recursive by default) call to
+Valid file extensions include \code{7z, zip, rar, gzip, rar, gzip, tar, bzip2, gz, tar.gz,
+tgz, bz, wim}. File (directory) listing is performed with a (non-recursive by default) call to
 \code{\link[base]{list.files}}. An error is raised if no files including one of these
 extensions are found in \emph{archive_path}.
 

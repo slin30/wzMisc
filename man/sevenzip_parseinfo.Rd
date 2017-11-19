@@ -2,7 +2,7 @@
 % Please edit documentation in R/sevenzip_parseinfo.R
 \name{sevenzip_parseinfo}
 \alias{sevenzip_parseinfo}
-\title{Extract key metadata from common 7-zip archives}
+\title{Parse key metadata from common 7-zip archives}
 \usage{
 sevenzip_parseinfo(x)
 }
@@ -14,7 +14,12 @@ action of \code{l} (\code{list})}
 A \code{data.frame}
 }
 \description{
-Extract key metadata from common 7-zip archives
+Extract the name and size of each file from a 7-zip listing
+}
+\details{
+This is mainly used as a helper for \code{\link{sevenzip_listcont}}. The expected
+input is a single listing from a 7-zip return, i.e. a call to 7-zip with an action of
+\code{l}.
 }
 \examples{
 #TBD

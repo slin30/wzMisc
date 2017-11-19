@@ -127,6 +127,9 @@ sevenzip_makecmd <- function(action = NULL, target = NULL, output = NULL, extras
     target <- tmp.output
   }
 
+  # enclose target in double quotes in case any spaces
+  target <- paste0('\"', target, '\"')
+
   out.args <- paste(
     action,
     target,
