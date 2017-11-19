@@ -7,26 +7,29 @@
 #' @param archive_path A path containing valid file extensions. See details for allowed extensions.
 #' @param extras Additional arguments to pass to \code{\link{sevenzip_makecmd}}
 #' @param recursive Should the call to \code{list.files} be performed recursively? Defaults to \code{FALSE}
-#' @param parse Should the call be parsed, using \code{\link{sevenzip_parseinfo}}? Defaults to \code{TRUE}
+#' @param parse Parse the raw return via \code{\link{sevenzip_parseinfo}}? Defaults to \code{TRUE}
 #'
 #' @details
-#' Valid file extensions include \code{7z, zip, rar, gzip, rar, gzip, tar, bzip2, gz, tar.gz}, which
-#' is performed with a (non-recursive by default) call to  \code{\link[base]{list.files}}.
-#' An error is raised if no files are found in \emph{archive_path} that include one of these
-#' extensions,
+#' Valid file extensions include \code{7z, zip, rar, gzip, rar, gzip, tar, bzip2, gz, tar.gz}.
+#' File (directory) listing is performed with a (non-recursive by default) call to
+#' \code{\link[base]{list.files}}. An error is raised if no files including one of these
+#' extensions are found in \emph{archive_path}.
 #'
 #' Running this with \code{recursive=TRUE} can be a useful way to get a listing of the contents of all valid
-#' archive files in a directory. Note, though, that this can take quite some time, depending on the
+#' archive files in a directory. Note, though, that this can take some time, depending on the
 #' scope and/or level of nesting of the target directory.
 #'
 #' @note
 #' There is no guarantee that this will work for a non-Windows OS.
 #'
 #' \emph{recursive} refers to the files in a directory, and not the contents of each archive.
-#' In other words, it will look beyond the first listing level in an archive, if applicable.
+#' In other words, this function will not look beyond the first listing level in an archive.
 #'
 #' @return
-#' If possible, a \code{data.frame}, assuming parsing is successful. Otherwise, a \code{list}.
+#' By default, a \code{data.frame} with the full path, archive name, and
+#' size of the file in KB, for each file within the first-level hierarchy of
+#' each archive found within \code{archive_path}. If parsing failed, of if
+#' no parsing is requested, a \code{list} containing the raw text output.
 #'
 #' @export
 #'
