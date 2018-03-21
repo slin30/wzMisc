@@ -3,6 +3,7 @@
 #' Extract the name and size of each file from a 7-zip listing
 #'
 #' @importFrom stringr str_locate str_sub str_extract
+#' @importFrom utils head
 #' @family sevenzip functions
 #'
 #' @param x A valid return from a (captured) call to 7-zip with an

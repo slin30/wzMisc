@@ -24,7 +24,7 @@ This is a minor modification of
 http://stackoverflow.com/questions/5060076/convert-html-character-entity-encoding-in-r,
 and all credit is due.
 
-This function will call either \code{\link[xml2]{read_xml}} or \code{\link[xml2]{read_html}},
+This function will call either \code{\link[xml2:read_xml]{xml2::read_xml()}} or \code{\link[xml2:read_xml]{xml2::read_html()}},
 depending on the value passed to the argument. The default, if not specified, is \code{html}.
 
 If called with \emph{iconv_encoding} == \code{TRUE}, \emph{x} is processed by \code{\link{iconv}},

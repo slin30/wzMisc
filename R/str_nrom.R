@@ -1,6 +1,9 @@
 #' String normalize-transform
 #'
 #' Strips special chars, lowercases, optionally re-encode to ASCII
+#'
+#' @importFrom stringr str_replace_all str_trim
+#'
 #' @param x character vector, or something coercible to chr
 #' @param lower Lowercase the output? Defaults to \code{FALSE}
 #' @param ... args to str_replace_all, i.e. pattern and replacement
@@ -11,15 +14,18 @@
 #' scraped text. Therefore, some options are intentionally hard-coded, i.e.
 #' any whitespace repeats >1 are truncated to 1, and the output is ws-trimmed on both sides.
 #'
-#' If no args are passed to \code{...} for \link[stringr]{str_replace_all}, generic defaults are used.
+#' If no args are passed to \code{...} for \link[stringr:str_replace]{stringr::str_replace_all()}, generic defaults are used.
 #' These defaults are meant to provide a potentially more useful output than just an error message,
 #' but this practice somewhat violates error handling paradigms by still trying to return something,
 #' which might not be expected As such, this behavior might change in future versions, and explicit arguments to
-#' \link[stringr]{str_replace_all} (again, via \code{...}) should always be provided.
+#' \code{str_replace_all} (again, via \code{...}) should always be provided.
+#'
 #' @return
 #' A \code{character} vector normalized according to input args and ws-normalized of length equal to
 #' \emph{x}. See details for what ws-normalized means.
+#'
 #' @export
+#'
 #' @examples
 #' x <- "Corrosion Survey Database (CORâ€¢SUR)"
 #' str_norm(x, "\\W", " ")
@@ -49,7 +55,7 @@ str_norm <- function(x, lower = FALSE, ..., to_ASCII = TRUE) {
 
   out <- tryCatch(
     {
-      stringr::str_replace_all(xnorm, ...)
+      str_replace_all(xnorm, ...)
     },
     error=function(e) {
       message(paste(e))
@@ -57,7 +63,7 @@ str_norm <- function(x, lower = FALSE, ..., to_ASCII = TRUE) {
               "Please supply BOTH explicit args if these are not suitable",
               sep = "\n")
               )
-      stringr::str_replace_all(xnorm, "\\s", " ")
+      str_replace_all(xnorm, "\\s", " ")
     },
     warning=function(w) {
       message(w)
@@ -66,6 +72,6 @@ str_norm <- function(x, lower = FALSE, ..., to_ASCII = TRUE) {
       invisible(xnorm)
     }
   )
-  out <- stringr::str_replace_all(out, "\\s{2,}", " ")
-  stringr::str_trim(out)
+  out <- str_replace_all(out, "\\s{2,}", " ")
+  str_trim(out)
 }

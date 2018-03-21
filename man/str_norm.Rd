@@ -28,11 +28,11 @@ This is a convenience function designed to streamline e.g. fuzzy chr matching, p
 scraped text. Therefore, some options are intentionally hard-coded, i.e.
 any whitespace repeats >1 are truncated to 1, and the output is ws-trimmed on both sides.
 
-If no args are passed to \code{...} for \link[stringr]{str_replace_all}, generic defaults are used.
+If no args are passed to \code{...} for \link[stringr:str_replace]{stringr::str_replace_all()}, generic defaults are used.
 These defaults are meant to provide a potentially more useful output than just an error message,
 but this practice somewhat violates error handling paradigms by still trying to return something,
 which might not be expected As such, this behavior might change in future versions, and explicit arguments to
-\link[stringr]{str_replace_all} (again, via \code{...}) should always be provided.
+\code{str_replace_all} (again, via \code{...}) should always be provided.
 }
 \examples{
 x <- "Corrosion Survey Database (CORâ€¢SUR)"

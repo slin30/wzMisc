@@ -22,7 +22,7 @@ Make functions that calculate hashed keys from the collapsed values of one or mo
 }
 \details{
 This function is meant to condense information for each row into a compact, meaningful
-md5 hash, using the \code{\link[openssl]{md5}} function. The outputs can be useful keys to compare
+md5 hash, using the \link[openssl:hash]{openssl::md5()} function. The outputs can be useful keys to compare
 across tables where a primary key is not readily available.
 
 Collisions are of course possible, but the chances of this happening should be exceedingly
