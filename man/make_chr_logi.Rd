@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_chr_logi.R
 \name{make_chr_logi}
 \alias{make_chr_logi}
-\title{Coerce one or values in a character vector to logical TRUE}
+\title{Coerce one or more values in a character vector to logical TRUE}
 \usage{
 make_chr_logi(x, val_as_TRUE = NULL, preserve_NA = TRUE, NA_as_what = NA)
 }

@@ -1,4 +1,4 @@
-#' Coerce one or values in a character vector to logical TRUE
+#' Coerce one or more values in a character vector to logical TRUE
 #'
 #' Transform a character into logical with denoted values as TRUE, with NA handling options
 #'
