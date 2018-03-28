@@ -47,7 +47,10 @@
 #' default denote the positions of values in \emph{dt_y} that match \emph{dt_x}, unless
 #' \code{reverse = TRUE}, in which case the reverse.
 #'
-#' Additionally, a console message containing match statistics.
+#' Additionally, a console message containing match statistics. If called with \code{accumulate=TRUE},
+#' statistics are printed out for each step in cumulative fashion, displaying the (any) additional
+#' coverage provided by each additional pair of match elements.
+#'
 #' @export
 #'
 #' @examples
@@ -67,6 +70,10 @@
 #' mvec <- match_xs_ys(dt_x, dt_y, c("key_a", "key_a"), c("col_a", "col_b"))
 #' # pull over results
 #' dt_x[, targ := dt_y$targ[mvec]]
+#'
+#' # also useful for quick tests:
+#' match_xs_ys(dt_x, dt_y, c("key_a", "key_a"), c("col_a", "col_b"),
+#'             accumulate = TRUE)
 match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, ...) {
   stopifnot(is.data.table(dt_x) && is.data.table(dt_y))
 
@@ -125,7 +132,7 @@ match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, ...) 
 
   message(paste(msglist, collapse = "\n"))
 
-  return(coll)
+  invisible(coll)
 }
 
 NULL

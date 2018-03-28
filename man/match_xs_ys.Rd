@@ -33,7 +33,9 @@ An \code{integer} vector of length \emph{xs} or length \emph{ys} (since it is re
 default denote the positions of values in \emph{dt_y} that match \emph{dt_x}, unless
 \code{reverse = TRUE}, in which case the reverse.
 
-Additionally, a console message containing match statistics.
+Additionally, a console message containing match statistics. If called with \code{accumulate=TRUE},
+statistics are printed out for each step in cumulative fashion, displaying the (any) additional
+coverage provided by each additional pair of match elements.
 }
 \description{
 Cascading character matching for sets of columns across two data.tables
@@ -78,4 +80,8 @@ dt_y <- data.table(
 mvec <- match_xs_ys(dt_x, dt_y, c("key_a", "key_a"), c("col_a", "col_b"))
 # pull over results
 dt_x[, targ := dt_y$targ[mvec]]
+
+# also useful for quick tests:
+match_xs_ys(dt_x, dt_y, c("key_a", "key_a"), c("col_a", "col_b"),
+            accumulate = TRUE)
 }
