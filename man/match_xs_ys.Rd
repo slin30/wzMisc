@@ -38,12 +38,30 @@ Addresses a common merge use case between two tables where a single, robust key 
 one or more fields between the two tables to make a best-attempt merge. In this scenario, the order of values in \emph{xs},
 and the corresponding order in \emph{ys} is critical, and should correspond to one's best-guess (expectation) of specificity,
 since this function calls \code{Reduce} to collapse the list of match results into a single vector.
+
+If the \code{fastmatch} package is loaded, will use \code{fastmatch::fmatch} for performance, else
+will use \code{base::match}.
 }
 \note{
 At the moment, this function coerces both \emph{xs} and \emph{ys} to lowercase via \code{tolower}. This is likely to be an
 option in the near future, perhaps with a default of \code{TRUE}. Additionally, \code{match} is called as
-\code{match(x, y, nomatch = NA, incomparables = NA)}, and this is enforced, with no plans to make optional.
+\code{match(x, y, nomatch = NA_integer_, incomparables = NULL)}, and this is enforced, with no plans to make optional.
 }
 \examples{
-# Real examples forthcoming
+set.seed(10)
+# dt_x is the table you want to append to
+dt_x <- data.table(
+  key_a = sample(LETTERS[1:15], replace = FALSE)
+)
+# dt_y has one or more target fields you wish to pull, using the keys
+# from dt_x.
+dt_y <- data.table(
+  col_a = unlist(Map(c, LETTERS[seq(1, 10, by = 2)], list(NA_character_))),
+  col_b = unlist(Map(c, list(NA_character_), LETTERS[seq(2, 11, by = 2)])),
+  targ = sample(1:100L, 10, replace = FALSE)
+)
+# this is used for indexing results out
+mvec <- match_xs_ys(dt_x, dt_y, c("key_a", "key_a"), c("col_a", "col_b"))
+# pull over results
+dt_x[, targ := dt_y$targ[mvec]]
 }

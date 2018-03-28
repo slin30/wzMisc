@@ -21,10 +21,13 @@
 #' and the corresponding order in \emph{ys} is critical, and should correspond to one's best-guess (expectation) of specificity,
 #' since this function calls \code{Reduce} to collapse the list of match results into a single vector.
 #'
+#' If the \code{fastmatch} package is loaded, will use \code{fastmatch::fmatch} for performance, else
+#' will use \code{base::match}.
+#'
 #' @note
 #' At the moment, this function coerces both \emph{xs} and \emph{ys} to lowercase via \code{tolower}. This is likely to be an
 #' option in the near future, perhaps with a default of \code{TRUE}. Additionally, \code{match} is called as
-#' \code{match(x, y, nomatch = NA, incomparables = NA)}, and this is enforced, with no plans to make optional.
+#' \code{match(x, y, nomatch = NA_integer_, incomparables = NULL)}, and this is enforced, with no plans to make optional.
 #'
 #' @return
 #' An \code{integer} vector of length \emph{xs} or length \emph{ys} (since it is required that \code{length(xs) == length(ys)})
@@ -35,7 +38,22 @@
 #' @export
 #'
 #' @examples
-#' # Real examples forthcoming
+#' set.seed(10)
+#' # dt_x is the table you want to append to
+#' dt_x <- data.table(
+#'   key_a = sample(LETTERS[1:15], replace = FALSE)
+#' )
+#' # dt_y has one or more target fields you wish to pull, using the keys
+#' # from dt_x.
+#' dt_y <- data.table(
+#'   col_a = unlist(Map(c, LETTERS[seq(1, 10, by = 2)], list(NA_character_))),
+#'   col_b = unlist(Map(c, list(NA_character_), LETTERS[seq(2, 11, by = 2)])),
+#'   targ = sample(1:100L, 10, replace = FALSE)
+#' )
+#' # this is used for indexing results out
+#' mvec <- match_xs_ys(dt_x, dt_y, c("key_a", "key_a"), c("col_a", "col_b"))
+#' # pull over results
+#' dt_x[, targ := dt_y$targ[mvec]]
 match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, ...) {
   stopifnot(is.data.table(dt_x) && is.data.table(dt_y))
 
@@ -90,8 +108,15 @@ match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, ...) {
 
 NULL
 
-#helper match, tolower with nonmatch NA, incomparables NA
+#helper match, tolower with nonmatch NA, incomparables NULL
 .lowerMatch <- function(x, y) {
+  if("fastmatch" %in% installed.packages())
+  {
+    fun = getFun("fastmatch::fmatch")
+  } else {
+    fun = getFun("base::match")
+  }
+
   if(!is.character(x)) {
     warning("x must be of class 'character'. Coercing, which may not be lossless")
     x <- as.character(x)
@@ -100,5 +125,6 @@ NULL
     warning("y must be of class 'character'. Coercing, which may not be lossless")
     y <- as.character(y)
   }
-  match(tolower(x), tolower(y), nomatch = NA, incomparables = NA)
+
+  fun(tolower(x), tolower(y), nomatch = NA_integer_, incomparables = NULL)
 }
