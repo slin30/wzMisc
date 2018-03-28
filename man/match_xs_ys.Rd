@@ -4,7 +4,8 @@
 \alias{match_xs_ys}
 \title{Collapse multiple possible matches between two data.tables}
 \usage{
-match_xs_ys(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, ...)
+match_xs_ys(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE,
+  use_fastmatch = FALSE, ...)
 }
 \arguments{
 \item{dt_x}{A data.table where you wish to find corresponding index values in \emph{dt_y}}
@@ -24,6 +25,9 @@ with a warning.}
 in \emph{dt_x} where corresponding values in \emph{dt_y} match? Defaults to \code{FALSE}}
 
 \item{lower}{Should values within \emph{xs} and \emph{ys} be lowercased? Defaults to \code{TRUE}}
+
+\item{use_fastmatch}{Use \code{fmatch()} from the \code{fastmatch} package if installed? Defaults
+to FALSE. See details}
 
 \item{...}{Additional arguments to pass to \code{Reduce()}}
 }
@@ -47,8 +51,11 @@ In this scenario, the order of values in \emph{xs}, and the corresponding order 
 critical, and should correspond to one's best-guess (expectation) of specificity, since this
 function calls \code{Reduce} to collapse the list of match results into a single vector.
 
-If the \code{fastmatch} package is loaded, will use \code{fastmatch::fmatch} for performance, else
-will use \code{base::match}.
+If the \code{fastmatch} package is loaded, and \emph{use_fastmatch} is \code{TRUE},
+will use \code{fastmatch::fmatch} for performance, else will use \code{base::match}. This
+is intentional due to the fact that \code{fmatch} will modify \code{dt_x} in-place by
+appending a hash index to fields flagged within \emph{xs}. To ensure this function is side-effect-
+free by default, you must set this option explicitly.
 }
 \note{
 By default, this function coerces both \emph{xs} and \emph{ys} to lowercase via \code{tolower}.

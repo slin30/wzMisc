@@ -16,6 +16,8 @@
 #' @param reverse Logi. Do you wish to perform the match in reverse, that is find indices
 #' in \emph{dt_x} where corresponding values in \emph{dt_y} match? Defaults to \code{FALSE}
 #' @param lower Should values within \emph{xs} and \emph{ys} be lowercased? Defaults to \code{TRUE}
+#' @param use_fastmatch Use \code{fmatch()} from the \code{fastmatch} package if installed? Defaults
+#' to FALSE. See details
 #' @param ... Additional arguments to pass to \code{Reduce()}
 #'
 #' @details
@@ -25,8 +27,11 @@
 #' critical, and should correspond to one's best-guess (expectation) of specificity, since this
 #' function calls \code{Reduce} to collapse the list of match results into a single vector.
 #'
-#' If the \code{fastmatch} package is loaded, will use \code{fastmatch::fmatch} for performance, else
-#' will use \code{base::match}.
+#' If the \code{fastmatch} package is loaded, and \emph{use_fastmatch} is \code{TRUE},
+#' will use \code{fastmatch::fmatch} for performance, else will use \code{base::match}. This
+#' is intentional due to the fact that \code{fmatch} will modify \code{dt_x} in-place by
+#' appending a hash index to fields flagged within \emph{xs}. To ensure this function is side-effect-
+#' free by default, you must set this option explicitly.
 #'
 #' @note
 #' By default, this function coerces both \emph{xs} and \emph{ys} to lowercase via \code{tolower}.
@@ -74,7 +79,7 @@
 #' # also useful for quick tests:
 #' match_xs_ys(dt_x, dt_y, c("key_a", "key_a"), c("col_a", "col_b"),
 #'             accumulate = TRUE)
-match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, ...) {
+match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, use_fastmatch = FALSE, ...) {
   stopifnot(is.data.table(dt_x) && is.data.table(dt_y))
 
   if(!is.character(xs) || ! is.character(ys)) {
@@ -107,7 +112,8 @@ match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, ...) 
   x_lst <- lapply(xs, function(f) dt_x[[f]])
   y_lst <- lapply(ys, function(f) dt_y[[f]])
 
-  out <- Map(.lowerMatch, x = x_lst, y = y_lst, lower = list(lower))
+  out <- Map(.lowerMatch, x = x_lst, y = y_lst, lower = list(lower),
+             use_fastmatch = list(use_fastmatch))
 
   coll <- Reduce(function(a, b) ifelse(is.na(a), b, a), out, ...)
 
@@ -138,8 +144,8 @@ match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, ...) 
 NULL
 
 #helper match, tolower with nonmatch NA, incomparables NULL
-.lowerMatch <- function(x, y, lower = lower) {
-  if("fastmatch" %in% installed.packages())
+.lowerMatch <- function(x, y, lower = lower, use_fastmatch = use_fastmatch) {
+  if("fastmatch" %in% installed.packages() && use_fastmatch)
   {
     fun = getFun("fastmatch::fmatch")
   } else {
