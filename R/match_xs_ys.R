@@ -104,17 +104,26 @@ match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, ...) 
 
   coll <- Reduce(function(a, b) ifelse(is.na(a), b, a), out, ...)
 
-  hit <- length(coll[!is.na(coll)])
-  tot <- length(coll)
-  pct <- sprintf("%.1f%%", 100*(hit/tot))
-  message(
-    paste(hit, "of", tot,
-          paste0(
-            "(", pct, ")"
-          ),
-          "matched"
-    )
-  )
+  # not terribly elegant, but for messaging in case Reduce
+  # accumulate TRUE
+
+  if(!is.list(coll)) {
+    coll.msg <- list(coll)
+  } else {
+    coll.msg <- coll
+  }
+
+  hit <- Map(function(x) length(x[!is.na(x)]), coll.msg)
+  tot <- Map(length, coll.msg)
+  pct <- Map(function(hit, tot) sprintf("%.1f%%", 100*(hit/tot)), hit, tot)
+
+  msglist <- Map(function(hit, tot, pct) paste(hit, "of", tot,
+                                               paste0(
+                                                 "(", pct, ")",
+                                                 " matched")),
+                 hit, tot, pct)
+
+  message(paste(msglist, collapse = "\n"))
 
   return(coll)
 }
