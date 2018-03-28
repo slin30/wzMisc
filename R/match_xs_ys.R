@@ -5,35 +5,47 @@
 #' @import data.table
 #'
 #' @param dt_x A data.table where you wish to find corresponding index values in \emph{dt_y}
-#' @param dt_y A data.table where matching values in \emph{dt_x} should be found, and indices from \emph{dt_y} returned
-#' @param xs A chr vector of names in \emph{dt_x} to match upon.
-#' Intrinsic order is potentially important, and must correspond to order and length of \emph{ys}. Non-character columns
+#' @param dt_y A data.table where matching values in \emph{dt_x} should be found,
+#' and indices from \emph{dt_y} returned
+#' @param xs A chr vector of names in \emph{dt_x} to match upon. Intrinsic order is potentially
+#' important, and must correspond to order and length of \emph{ys}. Non-character columns
 #' will be coerced to character via \code{as.character}, with a warning.
-#' @param ys A chr vector of names in \emph{dt_y} that correspond to \emph{xs} in scope and length. Non-character columns
-#' will be coerced to character via \code{as.character}, with a warning.
-#' @param reverse Logi. Do you wish to perform the match in reverse, that is find indices in \emph{dt_x} where corresponding
-#' values in \emph{dt_y} match? Defaults to \code{FALSE}
+#' @param ys A chr vector of names in \emph{dt_y} that correspond to \emph{xs} in scope and
+#' length. Non-character columns will be coerced to character via \code{as.character},
+#' with a warning.
+#' @param reverse Logi. Do you wish to perform the match in reverse, that is find indices
+#' in \emph{dt_x} where corresponding values in \emph{dt_y} match? Defaults to \code{FALSE}
 #' @param lower Should values within \emph{xs} and \emph{ys} be lowercased? Defaults to \code{TRUE}
 #' @param ... Additional arguments to pass to \code{Reduce()}
 #'
 #' @details
-#' Addresses a common merge use case between two tables where a single, robust key is not available, and one must rely on
-#' one or more fields between the two tables to make a best-attempt merge. In this scenario, the order of values in \emph{xs},
-#' and the corresponding order in \emph{ys} is critical, and should correspond to one's best-guess (expectation) of specificity,
-#' since this function calls \code{Reduce} to collapse the list of match results into a single vector.
+#' Addresses a common merge use case between two tables where a single, robust key is not available,
+#' and one must rely on one or more fields between the two tables to make a best-attempt merge.
+#' In this scenario, the order of values in \emph{xs}, and the corresponding order in \emph{ys} is
+#' critical, and should correspond to one's best-guess (expectation) of specificity, since this
+#' function calls \code{Reduce} to collapse the list of match results into a single vector.
 #'
 #' If the \code{fastmatch} package is loaded, will use \code{fastmatch::fmatch} for performance, else
 #' will use \code{base::match}.
 #'
 #' @note
-#' At the moment, this function coerces both \emph{xs} and \emph{ys} to lowercase via \code{tolower}. This is likely to be an
-#' option in the near future, perhaps with a default of \code{TRUE}. Additionally, \code{match} is called as
-#' \code{match(x, y, nomatch = NA_integer_, incomparables = NULL)}, and this is enforced, with no plans to make optional.
+#' By default, this function coerces both \emph{xs} and \emph{ys} to lowercase via \code{tolower}.
+#' \code{match} is called with defaults, i.e. \code{match(x, y, nomatch = NA_integer_, incomparables = NULL)},
+#' and this is enforced, with no plans to make optional.
+#'
+#' The \emph{length} requirement for formals \emph{xs} and \emph{ys} apply to the arguments themselves,
+#' and not to the length of variables represented by the values within each. In other words, a standard
+#' call to \code{match} does not require equal-length inputs, nor does this function. What is required,
+#' though, is that if e.g. \emph{xs} is a vector of length \code{2}, representing two fields within
+#' \emph{dt_x}, then the length of \emph{ys} must also be \code{2}, even if you wish to match a single
+#' field within \emph{dt_y} to each field within \emph{dt_x} (no recycling is performed on argument
+#' length for \emph{xs} or \emph{ys}).
 #'
 #' @return
-#' An \code{integer} vector of length \emph{xs} or length \emph{ys} (since it is required that \code{length(xs) == length(ys)})
-#' containing matching indices, else \code{NA}. The indices by default denote the positions of values in \emph{dt_y} that
-#' match \emph{dt_x}, unless \code{reverse = TRUE}, in which case the reverse.
+#' An \code{integer} vector of length \emph{xs} or length \emph{ys} (since it is required that
+#' \code{length(xs) == length(ys)}) containing matching indices, else \code{NA}. The indices by
+#' default denote the positions of values in \emph{dt_y} that match \emph{dt_x}, unless
+#' \code{reverse = TRUE}, in which case the reverse.
 #'
 #' Additionally, a console message containing match statistics.
 #' @export
