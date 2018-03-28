@@ -24,10 +24,12 @@ with a warning.}
 \item{reverse}{Logi. Do you wish to perform the match in reverse, that is find indices
 in \emph{dt_x} where corresponding values in \emph{dt_y} match? Defaults to \code{FALSE}}
 
-\item{lower}{Should values within \emph{xs} and \emph{ys} be lowercased? Defaults to \code{TRUE}}
+\item{lower}{Should values within \emph{xs} and \emph{ys} be lowercased? Defaults to \code{TRUE}.
+If possible and requested to use \code{fmatch}, keeping this at default will not set any hash
+indices, but will also not result in any benefits upon repeat runs.}
 
 \item{use_fastmatch}{Use \code{fmatch()} from the \code{fastmatch} package if installed? Defaults
-to FALSE. See details}
+to FALSE. See details, and also note interaction with the \emph{lower} parameter (above).}
 
 \item{...}{Additional arguments to pass to \code{Reduce()}}
 }
@@ -55,7 +57,8 @@ If the \code{fastmatch} package is loaded, and \emph{use_fastmatch} is \code{TRU
 will use \code{fastmatch::fmatch} for performance, else will use \code{base::match}. This
 is intentional due to the fact that \code{fmatch} will technically modify \code{dt_y} in-place by
 appending a hash index to fields flagged within \emph{ys}. To ensure this function is
-truly side-effect-free by default, you must set this option explicitly.
+truly side-effect-free by defalt, you must set this option explicitly. Also, there is no repeat-
+run benefit (but also no side-effect) with the default setting of \code{lower=TRUE}.
 }
 \note{
 By default, this function coerces both \emph{xs} and \emph{ys} to lowercase via \code{tolower}.
