@@ -13,6 +13,7 @@
 #' will be coerced to character via \code{as.character}, with a warning.
 #' @param reverse Logi. Do you wish to perform the match in reverse, that is find indices in \emph{dt_x} where corresponding
 #' values in \emph{dt_y} match? Defaults to \code{FALSE}
+#' @param lower Should values within \emph{xs} and \emph{ys} be lowercased? Defaults to \code{TRUE}
 #' @param ... Additional arguments to pass to \code{Reduce()}
 #'
 #' @details
@@ -54,7 +55,7 @@
 #' mvec <- match_xs_ys(dt_x, dt_y, c("key_a", "key_a"), c("col_a", "col_b"))
 #' # pull over results
 #' dt_x[, targ := dt_y$targ[mvec]]
-match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, ...) {
+match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, ...) {
   stopifnot(is.data.table(dt_x) && is.data.table(dt_y))
 
   if(!is.character(xs) || ! is.character(ys)) {
@@ -87,7 +88,7 @@ match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, ...) {
   x_lst <- lapply(xs, function(f) dt_x[[f]])
   y_lst <- lapply(ys, function(f) dt_y[[f]])
 
-  out <- Map(.lowerMatch, x_lst, y_lst)
+  out <- Map(.lowerMatch, x = x_lst, y = y_lst, lower = list(lower))
 
   coll <- Reduce(function(a, b) ifelse(is.na(a), b, a), out, ...)
 
@@ -109,7 +110,7 @@ match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, ...) {
 NULL
 
 #helper match, tolower with nonmatch NA, incomparables NULL
-.lowerMatch <- function(x, y) {
+.lowerMatch <- function(x, y, lower = lower) {
   if("fastmatch" %in% installed.packages())
   {
     fun = getFun("fastmatch::fmatch")
@@ -126,5 +127,10 @@ NULL
     y <- as.character(y)
   }
 
-  fun(tolower(x), tolower(y), nomatch = NA_integer_, incomparables = NULL)
+  if(lower) {
+    x <- tolower(x)
+    y <- tolower(y)
+  }
+
+  fun(x, y, nomatch = NA_integer_, incomparables = NULL)
 }

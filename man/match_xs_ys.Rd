@@ -4,7 +4,7 @@
 \alias{match_xs_ys}
 \title{Collapse multiple possible matches between two data.tables}
 \usage{
-match_xs_ys(dt_x, dt_y, xs, ys, reverse = FALSE, ...)
+match_xs_ys(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, ...)
 }
 \arguments{
 \item{dt_x}{A data.table where you wish to find corresponding index values in \emph{dt_y}}
@@ -20,6 +20,8 @@ will be coerced to character via \code{as.character}, with a warning.}
 
 \item{reverse}{Logi. Do you wish to perform the match in reverse, that is find indices in \emph{dt_x} where corresponding
 values in \emph{dt_y} match? Defaults to \code{FALSE}}
+
+\item{lower}{Should values within \emph{xs} and \emph{ys} be lowercased? Defaults to \code{TRUE}}
 
 \item{...}{Additional arguments to pass to \code{Reduce()}}
 }
