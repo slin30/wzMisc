@@ -29,9 +29,9 @@
 #'
 #' If the \code{fastmatch} package is loaded, and \emph{use_fastmatch} is \code{TRUE},
 #' will use \code{fastmatch::fmatch} for performance, else will use \code{base::match}. This
-#' is intentional due to the fact that \code{fmatch} will modify \code{dt_x} in-place by
-#' appending a hash index to fields flagged within \emph{xs}. To ensure this function is side-effect-
-#' free by default, you must set this option explicitly.
+#' is intentional due to the fact that \code{fmatch} will technically modify \code{dt_y} in-place by
+#' appending a hash index to fields flagged within \emph{ys}. To ensure this function is
+#' truly side-effect-free by default, you must set this option explicitly.
 #'
 #' @note
 #' By default, this function coerces both \emph{xs} and \emph{ys} to lowercase via \code{tolower}.
