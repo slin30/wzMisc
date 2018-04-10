@@ -5,7 +5,7 @@
 \title{Collapse multiple possible matches between two data.tables}
 \usage{
 match_xs_ys(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE,
-  use_fastmatch = FALSE, ...)
+  incomparables = NA, use_fastmatch = FALSE, ...)
 }
 \arguments{
 \item{dt_x}{A data.table where you wish to find corresponding index values in \emph{dt_y}}
@@ -27,6 +27,8 @@ in \emph{dt_x} where corresponding values in \emph{dt_y} match? Defaults to \cod
 \item{lower}{Should values within \emph{xs} and \emph{ys} be lowercased? Defaults to \code{TRUE}.
 If possible and requested to use \code{fmatch}, keeping this at default will not set any hash
 indices, but will also not result in any benefits upon repeat runs.}
+
+\item{incomparables}{For \code{match}; set to \code{NA} by default to prevent matches on \code{NA}}
 
 \item{use_fastmatch}{Use \code{fmatch()} from the \code{fastmatch} package if installed? Defaults
 to FALSE. See details, and also note interaction with the \emph{lower} parameter (above).}

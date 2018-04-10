@@ -18,6 +18,7 @@
 #' @param lower Should values within \emph{xs} and \emph{ys} be lowercased? Defaults to \code{TRUE}.
 #' If possible and requested to use \code{fmatch}, keeping this at default will not set any hash
 #' indices, but will also not result in any benefits upon repeat runs.
+#' @param incomparables For \code{match}; set to \code{NA} by default to prevent matches on \code{NA}
 #' @param use_fastmatch Use \code{fmatch()} from the \code{fastmatch} package if installed? Defaults
 #' to FALSE. See details, and also note interaction with the \emph{lower} parameter (above).
 #' @param ... Additional arguments to pass to \code{Reduce()}
@@ -82,7 +83,7 @@
 #' # also useful for quick tests:
 #' match_xs_ys(dt_x, dt_y, c("key_a", "key_a"), c("col_a", "col_b"),
 #'             accumulate = TRUE)
-match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, use_fastmatch = FALSE, ...) {
+match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, incomparables = NA, use_fastmatch = FALSE, ...) {
   stopifnot(is.data.table(dt_x) && is.data.table(dt_y))
 
   if(!is.character(xs) || ! is.character(ys)) {
@@ -116,7 +117,8 @@ match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, use_f
   y_lst <- lapply(ys, function(f) dt_y[[f]])
 
   out <- Map(.lowerMatch, x = x_lst, y = y_lst, lower = list(lower),
-             use_fastmatch = list(use_fastmatch))
+             use_fastmatch = list(use_fastmatch),
+             incomparables = list(incomparables))
 
   coll <- Reduce(function(a, b) ifelse(is.na(a), b, a), out, ...)
 
@@ -146,8 +148,8 @@ match_xs_ys <- function(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE, use_f
 
 NULL
 
-#helper match, tolower with nonmatch NA, incomparables NULL
-.lowerMatch <- function(x, y, lower = lower, use_fastmatch = use_fastmatch) {
+#helper match, tolower with nonmatch NA, incomparables NA
+.lowerMatch <- function(x, y, lower = lower, incomparables = NA, use_fastmatch = use_fastmatch) {
   if("fastmatch" %in% installed.packages() && use_fastmatch)
   {
     fun = getFun("fastmatch::fmatch")
@@ -169,5 +171,5 @@ NULL
     y <- tolower(y)
   }
 
-  fun(x, y, nomatch = NA_integer_, incomparables = NULL)
+  fun(x, y, nomatch = NA_integer_, incomparables = incomparables)
 }
