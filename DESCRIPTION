@@ -1,6 +1,6 @@
 Package: wzMisc
 Title: Miscellaneous functions by WZ
-Version: 0.1.045
+Version: 0.1.046
 Authors@R: person("Wen", "Zhang", email = "slin30@gmail.com", role = c("aut", "cre"))
 Description: Functions for a range of tasks, some of which should probably be split into
              their own package, namely the CAS (CAS-RN) functions.
