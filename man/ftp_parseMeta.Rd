@@ -52,6 +52,6 @@ ftp_parseMeta(my_meta)
 }
 }
 \seealso{
-Other ftp_functions: \code{\link{ftp_listDir}},
-  \code{\link{ftp_makeParams}}
+Other ftp_functions: \code{\link{ftp_getBinPars}},
+  \code{\link{ftp_listDir}}, \code{\link{ftp_makeParams}}
 }
