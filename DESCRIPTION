@@ -5,7 +5,7 @@ Authors@R: person("Wen", "Zhang", email = "slin30@gmail.com", role = c("aut", "c
 Description: Functions for a range of tasks, some of which should probably be split into
              their own package, namely the CAS (CAS-RN) functions.
 Depends:
-    R (>= 3.4.3)
+    R (>= 3.4)
 Imports:
     data.table,
     stringr,
