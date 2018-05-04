@@ -63,6 +63,7 @@
 #' @export
 #'
 #' @examples
+#' library(data.table)
 #' set.seed(10)
 #' # dt_x is the table you want to append to
 #' dt_x <- data.table(

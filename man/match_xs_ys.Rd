@@ -76,6 +76,7 @@ field within \emph{dt_y} to each field within \emph{dt_x} (no recycling is perfo
 length for \emph{xs} or \emph{ys}).
 }
 \examples{
+library(data.table)
 set.seed(10)
 # dt_x is the table you want to append to
 dt_x <- data.table(

@@ -45,6 +45,7 @@ Use \code{...} to pass e.g. \code{fixed = TRUE} or \code{perl = TRUE} to \code{s
 for \code{\link[data.table]{tstrsplit}}.
 }
 \examples{
+library(data.table)
 set.seed(1)
 dt <- data.table(
     ID = 1:10,

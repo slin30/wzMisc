@@ -29,6 +29,7 @@
 #' \emph{targ} column will be returned as well, if \emph{keep.targ} is \code{TRUE}.
 #' @export
 #' @examples
+#' library(data.table)
 #' set.seed(1)
 #' dt <- data.table(
 #'     ID = 1:10,
