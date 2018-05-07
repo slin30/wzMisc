@@ -1,6 +1,6 @@
 #' ftp_getBinPars
 #'
-#' Get parameters needed to download one or more remote binary file to a local directory
+#' Get parameters needed to download one or more remote binary file(s) to a local directory
 #'
 #' @import data.table
 #' @family ftp_functions
@@ -137,9 +137,9 @@ ftp_getBinPars <- function(host = NULL, user = NULL, pwd = NULL, hdir = NULL, ld
     finally = NULL
   )
 
-  # early termination if error from server
+  # early termination if error
   if(is.null(call_ret)) {
-    message("SERVER ERROR; returning the call parameters that raised the error")
+    message("...returning the call parameters that raised the error")
     return(list(call_params = call_params))
   }
   # early termination if we do not have file-level info either

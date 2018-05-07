@@ -48,7 +48,15 @@ ftp_listDir <- function(arglist, include_fileInfo = TRUE, ncharlim = 3L) {
   arglist[["crlf"]] <- TRUE
 
 
-  res <- do.call(getURL, arglist)
+  res <- do.call(getURL, arglist) # use RCurl getURL error handling first
+
+  # if empty string, then we have no files
+  if(res == "") {
+    stop(
+      "Server call succeeded, but returned an empty string\n",
+      "  This usually means there are no files in the specified directory"
+    )
+  }
 
   server_paths <- unlist(strsplit(res, split = "\r\n"))
 

@@ -57,7 +57,7 @@ If no server error, but all required return data is not detected, then an error 
 }
 }
 \description{
-Get parameters needed to download one or more remote binary file to a local directory
+Get parameters needed to download one or more remote binary file(s) to a local directory
 }
 \details{
 This function performs three main tasks. First, it verifies if the server can even be queried
