@@ -4,12 +4,14 @@
 \alias{curlProgress}
 \title{curlProgress}
 \usage{
-curlProgress(url, fname, width_fx = 0.8)
+curlProgress(url, fname, mode = "wb", width_fx = 0.8)
 }
 \arguments{
 \item{url}{A remote URL}
 
 \item{fname}{The local destination, including the file name and extension}
+
+\item{mode}{Mode, as in RCurl::CFILE. Read, Write; Text, Binary. Defaults to 'wb' (write binary)}
 
 \item{width_fx}{(Optional) The console output message width; defaults to \code{0.8}}
 }
@@ -20,7 +22,8 @@ The requested asset
 Download a binary file from remote to local, with progress monitor
 }
 \details{
-This is unabashedly taken from https://stackoverflow.com/a/21961094, and all credit is due.
+This is unabashedly taken from https://stackoverflow.com/a/21961094, and all credit is due. Minor
+additional input checks.
 }
 \examples{
 \dontrun{

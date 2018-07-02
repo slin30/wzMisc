@@ -6,10 +6,12 @@
 #'
 #' @param url A remote URL
 #' @param fname The local destination, including the file name and extension
+#' @param mode Mode, as in RCurl::CFILE. Read, Write; Text, Binary. Defaults to 'wb' (write binary)
 #' @param width_fx (Optional) The console output message width; defaults to \code{0.8}
 #'
 #' @details
-#' This is unabashedly taken from https://stackoverflow.com/a/21961094, and all credit is due.
+#' This is unabashedly taken from https://stackoverflow.com/a/21961094, and all credit is due. Minor
+#' additional input checks.
 #'
 #' @seealso \code{\link{ftp_getBinPars}} for creating FTP parameters to pass to this function.
 #'
@@ -24,8 +26,15 @@
 #'   fname = "./local_dir/myfile.zip"
 #' )
 #' }
-curlProgress=function(url, fname, width_fx = 0.8){
-  f = CFILE(fname, mode="wb")
+curlProgress=function(url, fname, mode = "wb", width_fx = 0.8){
+  allowed_modes <- c("wb", "rb", "w", "b")
+  mode <- tolower(mode)
+  if(length(mode) > 1L || !mode %in% allowed_modes) {
+    stop("mode must be one of\n\t[",
+         paste(allowed_modes, collapse = ", "),
+         "]")
+  }
+  f = CFILE(fname, mode=mode)
   width= getOption("width") * width_fx   # you can make here your line shorter/longer
   pcur=0
   ret=curlPerform(url=url, writedata=f@ref,  noprogress=FALSE,
