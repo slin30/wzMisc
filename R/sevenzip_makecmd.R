@@ -34,6 +34,12 @@
 #' If you feel something is missing, it probably is, but then you are also likely not the
 #' target end-user.
 #'
+#' If your file reference(s) contain a space, make sure you quote the values with e.g.
+#' \code{shQuote()}. Also, to e.g. archive multiple files at a time, \code{paste()} the
+#' values together to create a vector of length 1, using the default whitespace separator
+#' for \code{paste}; in this situation, you must \code{shQuote} each of the file references
+#' prior to \code{past}ing them.
+#'
 #' @return
 #' A \code{list} of length 2, containing the \code{command} and \code{args}; the former will
 #' always be \code{7z}. Specifically designed to be compatible with \code{\link[base]{system2}} via

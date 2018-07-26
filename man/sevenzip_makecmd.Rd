@@ -49,6 +49,12 @@ commands, and the main audience comprises those who are not already fluent in in
 7-zip from the command line, but need to use some of its capabilities programatically.
 If you feel something is missing, it probably is, but then you are also likely not the
 target end-user.
+
+If your file reference(s) contain a space, make sure you quote the values with e.g.
+\code{shQuote()}. Also, to e.g. archive multiple files at a time, \code{paste()} the
+values together to create a vector of length 1, using the default whitespace separator
+for \code{paste}; in this situation, you must \code{shQuote} each of the file references
+prior to \code{past}ing them.
 }
 \examples{
 \dontrun{
