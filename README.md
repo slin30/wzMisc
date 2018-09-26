@@ -8,6 +8,9 @@
 This is the initial major release suitable for public consumption. 
 
 ## Changelog
+`1.1.1 (2018-09-26)`
+* Handle all NA columns for UNIQUEN and INTEGRAL_DUPE_FCTR in `profile_table` 
+
 `1.1.0 (2018-09-26)`
 
 * Add `profile_table`

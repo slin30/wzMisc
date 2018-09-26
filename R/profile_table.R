@@ -41,6 +41,7 @@
 #'   int_col = int_sample,
 #'   int_as_factor = as.factor(int_sample),
 #'   int_as_chr = as.character(int_sample),
+#'   all_NA_chr = NA_character_,
 #'   stringsAsFactors = FALSE
 #' )
 #'
@@ -122,7 +123,12 @@ profile_table <- function(tbl, pivot = TRUE) {
 }
 .dupe_factor_int <- function(x) {
   if(all(is.na(x))) {
-    return(NA_integer_)
+    return(
+      list(
+        un = NA_integer_,
+        dupe_fctr = NA_integer_
+      )
+    )
   }
   un <- .valid_uN(x)
   len <- length(x)
@@ -131,7 +137,10 @@ profile_table <- function(tbl, pivot = TRUE) {
   fctr_modu <- len %% un
 
   fctr_num[fctr_modu != 0] <- NA_real_
-  list(un = un, dupe_fctr = as.integer(fctr_num))
+  list(
+    un = un,
+    dupe_fctr = as.integer(fctr_num)
+  )
 }
 .length_complete <- function(x) {
   if(all(is.na(x))) {

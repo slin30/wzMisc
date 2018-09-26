@@ -48,6 +48,7 @@ test_df <- data.frame(
   int_col = int_sample,
   int_as_factor = as.factor(int_sample),
   int_as_chr = as.character(int_sample),
+  all_NA_chr = NA_character_,
   stringsAsFactors = FALSE
 )
 
