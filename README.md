@@ -3,7 +3,7 @@
 
 
 ## Miscellaneous functions package
-*Version `1.1.0`*
+*Version `1.1.1`*
 
 This is the initial major release suitable for public consumption. 
 
