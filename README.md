@@ -3,15 +3,24 @@
 
 
 ## Miscellaneous functions package
-### Version `1.0.0`
+### Version `1.1.0`
 
 This is the initial release suitable for public consumption. 
+
+### Changes
+`1.1.0 (2018-09-26)`
+
+* Add \code{profile_table}
+
+---
 
 Install using devtools:
 
 `devtools::install_github("slin30/wzMisc")`
 
-Some functions in this package depend on data.table (>= 1.10.0). Please refer to the extensive wiki
+## Note
+
+Some functions in this package depend on data.table; please refer to their extensive wiki
 for additional information:
 
 [data.table installation](https://github.com/Rdatatable/data.table/wiki)
