@@ -3,16 +3,18 @@
 
 
 ## Miscellaneous functions package
-### Version `1.1.0`
+*Version `1.1.0`*
 
-This is the initial release suitable for public consumption. 
+This is the initial major release suitable for public consumption. 
 
-### Changes
+## Changelog
 `1.1.0 (2018-09-26)`
 
-* Add \code{profile_table}
+* Add `profile_table`
 
 ---
+
+## Installation
 
 Install using devtools:
 
