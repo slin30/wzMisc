@@ -15,14 +15,15 @@ profile_table(tbl, pivot = TRUE)
 By default, a data.table with the following fields:
 
 \itemize{
-\item field_name: \code{factor}; input field names
-\item CLASS: \code{chr}; the class of the field
+\item field_name: \code{factor}; input field names.
+\item CLASS: \code{chr}; the class of the field. If multiple classes, these are
+      collapsed with a semicolon delimiter.
 \item MAYBE_NUMBER: \code{logi}; does the field contain only numbers, such that even
       upon coercion of non-numeric fields, no \code{NA} values would result?
       Always \code{TRUE} for \code{numeric} (or \code{integer}) fields
 \item FRAC_COMPLETE: \code{numeric}; the fraction of rows that are not \code{NA}
 \item NCHAR_MAX_LEN: \code{integer}; the maximum character length of the field, after
-      coercing to \code{character}
+      coercing to \code{character}.
 \item UNIQUEN: \code{integer}; the distinct count of values, excluding \code{NA}
 \item INTEGRAL_DUPE_FCTR; \code{integer}; the fraction of duplicate values, only if
       the result of dividing the distinct count of non-\code{NA} values by the
@@ -49,6 +50,7 @@ test_df <- data.frame(
   int_as_factor = as.factor(int_sample),
   int_as_chr = as.character(int_sample),
   all_NA_chr = NA_character_,
+  posix_ct_t = as.POSIXct(as.Date("2001-01-01")),
   stringsAsFactors = FALSE
 )
 
