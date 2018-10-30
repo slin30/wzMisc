@@ -93,6 +93,16 @@ make_chunks <- function (n, chunk_size, start, limit = Inf, n.fx = 1.00)
     }
   }
 
+  # handle zero start
+  if(start == 0L) {
+    zoffset <- 1L
+  } else {
+    zoffset <- 0L
+  }
+
+  n <- n -zoffset
+
+
   if(start > n){
     stop(paste("n is", n, "which is less than the requested start value of", start,
                "\nThis does not make sense, as the start argument is meant to initiate incrementing",
@@ -115,11 +125,15 @@ make_chunks <- function (n, chunk_size, start, limit = Inf, n.fx = 1.00)
                     "re-run with a compatible n.fx value"))
       n.fx <- 1+n.fx
     }
-    chunk_size <- ceiling(min(c(
-      (n*n.fx),
-      limit))
+    chunk_size <- ceiling(
+      min(
+        c(
+          (n*n.fx),
+          limit
+        )
+      ) +
+        zoffset
     )
-
     message(paste0("n < chunk_size; since chunk_size cannot exceed ", n,
                    ", setting chunk_size to ", chunk_size))
     n <- ceiling(n*n.fx)
@@ -127,12 +141,14 @@ make_chunks <- function (n, chunk_size, start, limit = Inf, n.fx = 1.00)
   }
 
   nchunks <- ceiling(as.integer((n-start+1))/chunk_size)
-  print(paste("Total number of chunks is", nchunks))
+  message(paste("Total number of chunks is", nchunks))
+
   from <- seq(start, n, by = chunk_size)
   to <- from + (chunk_size - 1)
   to[to >= n] <- n
   to <- as.integer(to)
   per <- to - from + 1
+
   out <- data.frame(from = from, to = to, size = per)
   stopifnot(sum(out[["size"]]) == as.integer(n) - start + 1)
   return(out)

@@ -3,11 +3,14 @@
 
 
 ## Miscellaneous functions package
-*Version `1.1.2`*
+*Version `1.1.3`*
 
 This is the initial major release suitable for public consumption. 
 
 ## Changelog
+`1.1.3 (2018-10-30)`
+* Properly handle zero start for `make_chunks`
+
 `1.1.2 (2018-10-10)`
 * Handle multiple `class` returns in `profile_table`
 
