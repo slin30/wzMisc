@@ -94,3 +94,4 @@ to be used for.
 Other ftp_functions: \code{\link{ftp_listDir}},
   \code{\link{ftp_makeParams}}, \code{\link{ftp_parseMeta}}
 }
+\concept{ftp_functions}

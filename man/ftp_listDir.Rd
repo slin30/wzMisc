@@ -37,3 +37,4 @@ ftp_listDir(my_arglist)
 Other ftp_functions: \code{\link{ftp_getBinPars}},
   \code{\link{ftp_makeParams}}, \code{\link{ftp_parseMeta}}
 }
+\concept{ftp_functions}

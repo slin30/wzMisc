@@ -63,3 +63,4 @@ do.call(getURL, my_params)
 Other ftp_functions: \code{\link{ftp_getBinPars}},
   \code{\link{ftp_listDir}}, \code{\link{ftp_parseMeta}}
 }
+\concept{ftp_functions}

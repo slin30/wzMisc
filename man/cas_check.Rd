@@ -49,3 +49,4 @@ cas_check(c(NA, NULL, x_messy, NULL, NA)) # NULL removed, length == length(x)-le
 Other cas_functions: \code{\link{cas_checkSum}},
   \code{\link{cas_detect}}
 }
+\concept{cas_functions}

@@ -35,7 +35,7 @@ which might not be expected As such, this behavior might change in future versio
 \code{str_replace_all} (again, via \code{...}) should always be provided.
 }
 \examples{
-x <- "Corrosion Survey Database (CORâ€¢SUR)"
+x <- "Corrosion Survey Database (CORÃ¢â‚¬Â¢SUR)"
 str_norm(x, "\\\\W", " ")
 str_norm(x, "\\\\s", " ") #keep parentheses
 str_norm(x, "\\\\W", " ", to_ASCII = FALSE) #iconv option not used

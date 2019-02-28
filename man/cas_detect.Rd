@@ -4,7 +4,8 @@
 \alias{cas_detect}
 \title{Detect if something is (likely) a validly formatted CAS RN}
 \usage{
-cas_detect(x, preprocess = FALSE, output = c("check", "count", "result"))
+cas_detect(x, preprocess = FALSE, output = c("check", "count",
+  "result"))
 }
 \arguments{
 \item{x}{chr. A vector of values to check}
@@ -58,3 +59,4 @@ cas_detect(gsub("[^\\\\w-]", "", toCheck, perl = TRUE), preprocess = TRUE, outpu
 Other cas_functions: \code{\link{cas_checkSum}},
   \code{\link{cas_check}}
 }
+\concept{cas_functions}

@@ -3,11 +3,15 @@
 
 
 ## Miscellaneous functions package
-*Version `1.1.3`*
+*Version `1.1.4`*
 
 This is the initial major release suitable for public consumption. 
 
 ## Changelog
+`1.1.4 (2019-02-28)`
+* Do not lowercase `host` par in `ftp_makeParams`
+* Set classes properly for default output of `profile_table` as implied in documentation
+
 `1.1.3 (2018-10-30)`
 * Properly handle zero start for `make_chunks`
 

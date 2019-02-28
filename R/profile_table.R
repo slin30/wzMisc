@@ -81,6 +81,12 @@ profile_table <- function(tbl, pivot = TRUE) {
 
   if(pivot) {
     out <- dcast(out, ... ~ variable, value.var = "value")
+    # melt values are all chr, so handle here when cast
+    out[["MAYBE_NUMBER"]] <- as.logical(out[["MAYBE_NUMBER"]])
+    out[["FRAC_COMPLETE"]] <- as.numeric(out[["FRAC_COMPLETE"]])
+    out[["NCHAR_MAX_LEN"]] <- as.integer(out[["NCHAR_MAX_LEN"]])
+    out[["UNIQUEN"]] <- as.integer(out[["UNIQUEN"]])
+    out[["INTEGRAL_DUPE_FCTR"]] <- as.integer(out[["INTEGRAL_DUPE_FCTR"]])
   }
   out
 }

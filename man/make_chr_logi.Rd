@@ -4,7 +4,8 @@
 \alias{make_chr_logi}
 \title{Coerce one or more values in a character vector to logical TRUE}
 \usage{
-make_chr_logi(x, val_as_TRUE = NULL, preserve_NA = TRUE, NA_as_what = NA)
+make_chr_logi(x, val_as_TRUE = NULL, preserve_NA = TRUE,
+  NA_as_what = NA)
 }
 \arguments{
 \item{x}{Input character vector to coerce to logical}

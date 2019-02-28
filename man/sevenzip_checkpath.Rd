@@ -48,3 +48,4 @@ Other sevenzip functions: \code{\link{sevenzip_listcont}},
   \code{\link{sevenzip_makecmd}},
   \code{\link{sevenzip_parseinfo}}
 }
+\concept{sevenzip functions}

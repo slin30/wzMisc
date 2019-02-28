@@ -2,7 +2,6 @@
 % Please edit documentation in R/depth.R
 \name{depth}
 \alias{depth}
-\alias{depth}
 \alias{depth_while}
 \title{depth}
 \usage{

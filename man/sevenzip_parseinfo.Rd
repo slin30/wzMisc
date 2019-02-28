@@ -29,3 +29,4 @@ Other sevenzip functions: \code{\link{sevenzip_checkpath}},
   \code{\link{sevenzip_listcont}},
   \code{\link{sevenzip_makecmd}}
 }
+\concept{sevenzip functions}

@@ -4,8 +4,8 @@
 \alias{split_fill}
 \title{Split and fill a chr vector}
 \usage{
-split_fill(dat, targ, split_on, IDcol, rebind = FALSE, keep.targ = FALSE,
-  ...)
+split_fill(dat, targ, split_on, IDcol, rebind = FALSE,
+  keep.targ = FALSE, ...)
 }
 \arguments{
 \item{dat}{a data.table}
