@@ -3,11 +3,14 @@
 
 
 ## Miscellaneous functions package
-*Version `1.1.4`*
+*Version `1.1.5`*
 
 This is the initial major release suitable for public consumption. 
 
 ## Changelog
+`1.1.5 (2019-03-04)`
+* Use `mode() <- "integer"` for `cas_checksum()` for efficiency
+
 `1.1.4 (2019-02-28)`
 * Do not lowercase `host` par in `ftp_makeParams`
 * Set classes properly for default output of `profile_table` as implied in documentation

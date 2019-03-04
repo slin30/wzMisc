@@ -59,9 +59,11 @@ cas_checkSum <- function(x, checkLEN = TRUE) {
   maxlen  <- max(nchar(x_clean), na.rm = TRUE)
   x_clean <- str_pad(x_clean, width = maxlen, side = "left", pad = "0")
 
-  x_split <- strsplit(substr(x_clean, 1, nchar(x_clean)-1), "") %>%
-    Map(as.integer, .) %>%
-    do.call(cbind, .)
+  x_split <- do.call(
+    cbind,
+    strsplit(substr(x_clean, 1, nchar(x_clean)-1), "")
+  )
+  mode(x_split) <- "integer"
 
   x_pos  <- rev(seq_len(nrow(x_split)))
   x_calc <- colSums(x_split * x_pos)
