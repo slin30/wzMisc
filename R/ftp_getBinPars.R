@@ -163,7 +163,9 @@ ftp_getBinPars <- function(host = NULL, user = NULL, pwd = NULL, hdir = NULL, ld
     )
   }
 
-  files <- file_dt[get("type_code") == 1L, name]
+  # now subset file_dt by type_code, and extract just name field for downstream
+  file_dt <- file_dt[get("type_code") == 1L]
+  files <- file_dt[["name"]]
 
   # early termination if we do not have any type code 1, indicating no files/only dir listing
   if(length(files) == 0L) {

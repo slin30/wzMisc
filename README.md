@@ -3,11 +3,14 @@
 
 
 ## Miscellaneous functions package
-*Version `1.1.5`*
+*Version `1.1.6`*
 
 This is the initial major release suitable for public consumption. 
 
 ## Changelog
+`1.1.6 (2019-03-06)`
+* `ftp_getBinPars()` file dt should be subset by type code upstream
+
 `1.1.5 (2019-03-04)`
 * Use `mode() <- "integer"` for `cas_checksum()` for efficiency
 
