@@ -10,6 +10,7 @@ This is the initial major release suitable for public consumption.
 ## Changelog
 `1.1.6 (2019-03-06)`
 * `ftp_getBinPars()` file dt should be subset by type code upstream
+* Fixed remote file path in `ftp_getBinPars()` when a nested dir is passed as `hdir`
 
 `1.1.5 (2019-03-04)`
 * Use `mode() <- "integer"` for `cas_checksum()` for efficiency

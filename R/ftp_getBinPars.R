@@ -193,18 +193,23 @@ ftp_getBinPars <- function(host = NULL, user = NULL, pwd = NULL, hdir = NULL, ld
   }
 
   # these are your target remote files
+  # first generate a prefix to extract file path of remote
+  remote_file_prefix <- norm_trailing_slash(
+    paste0(
+      "ftp://",
+      call_ret[["root_url"]]
+    ),
+    how = "replace",
+    replace_with = "forward"
+  )
+
   remote_paths <- paste0(
     norm_trailing_slash(
       call_ret[["root_url"]],
       how = "replace",
       replace_with = "forward"
     ),
-    norm_trailing_slash(
-      file_dt[["parent_dir"]],
-      how = "replace",
-      replace_with = "forward",
-      strip_leading = TRUE
-    ),
+    sub(remote_file_prefix, "", call_params[["url"]]),
     files
   )
   # generate remote urls
