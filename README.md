@@ -3,11 +3,14 @@
 
 
 ## Miscellaneous functions package
-*Version `1.1.6`*
+*Version `1.2.0`*
 
 This is the initial major release suitable for public consumption. 
 
 ## Changelog
+`1.2.0 (2019-04-26)`
+* Add `rgb_brightness`
+
 `1.1.6 (2019-03-06)`
 * `ftp_getBinPars()` file dt should be subset by type code upstream
 * Fixed remote file path in `ftp_getBinPars()` when a nested dir is passed as `hdir`
@@ -29,7 +32,6 @@ This is the initial major release suitable for public consumption.
 * Handle all NA columns for UNIQUEN and INTEGRAL_DUPE_FCTR in `profile_table` 
 
 `1.1.0 (2018-09-26)`
-
 * Add `profile_table`
 
 ---
