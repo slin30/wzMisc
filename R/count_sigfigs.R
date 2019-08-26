@@ -2,7 +2,6 @@
 #'
 #' Count number of significant digits (figures), option to include trailing zeros
 #'
-#' @importFrom magrittr %>%
 #' @importFrom stringr str_replace str_extract str_count str_split_fixed str_match
 #'
 #' @param x numeric or character vector; only character input is allowed if \code{countTrailing=TRUE}.
@@ -89,7 +88,13 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
   na_input <- is.na(x) | is.na(as.numeric(x))
   #prepare to handle all zeros downstream
   xtype       <- class(x)
-  digitCounts <- str_extract(x, "\\d*\\.?\\d*") %>% str_count("\\d")
+  digitCounts <- str_count(
+    str_extract(
+      x,
+      "\\d*\\.?\\d*"
+    ),
+    "\\d"
+  )
   zeroCheck   <- suppressWarnings(as.numeric(x)) == 0
   zeroCheck[is.na(zeroCheck)] <- FALSE
 
@@ -104,41 +109,54 @@ count_sigfigs <- function (x, digits = getOption("digits"), countTrailing = FALS
     }
     else {
       #Split, handle NAs
-      splits <- str_split_fixed(x, "\\.", 2) %>%
-        matrix(., ncol = 2) %>%
-        apply(X = ., 2, function(x) {
+      splits_m <- matrix(
+        str_split_fixed(x, "\\.", 2),
+        ncol = 2
+      )
+      mat <- matrix(
+        apply(splits_m, 2, function(x) {
           x[is.na(suppressWarnings(as.numeric(x)))] <- NA
-          x}) %>%
-        matrix(., ncol = 2)
+          x
+        }),
+        ncol = 2
+      )
 
       #Handle V1 leading zeros
-      splits[, 1] <- str_replace(splits[, 1], "^0?0*", "")
-      splits[, 1] <- ifelse(splits[, 1] == "", NA, splits[, 1])
+      mat[, 1] <- str_replace(mat[, 1], "^0?0*", "")
+      mat[, 1] <- ifelse(mat[, 1] == "", NA, mat[, 1])
       #Process V2 based on V1
-      splits[, 2] <- ifelse(is.na(splits[, 1]), str_replace(splits[, 2], "^0?0*", ""), splits[, 2])
+      mat[, 2] <- ifelse(is.na(mat[, 1]), str_replace(mat[, 2], "^0?0*", ""), mat[, 2])
       # Conditional extract V1
-      V1_filt <- suppressWarnings(as.integer(splits[, 2])) == 0
+      V1_filt <- suppressWarnings(as.integer(mat[, 2])) == 0
       V1_filt[is.na(V1_filt)] <- FALSE
-      V1_val  <- str_extract(splits[, 1], "0*$") %>% nchar
+      V1_val  <- nchar(
+        str_extract(mat[, 1], "0*$")
+      )
 
       V1_extra <- rep(0, length(V1_filt))
       V1_extra[V1_filt] <- V1_val[V1_filt]
 
       #Extract terminal zero(s) and count
-      extra <- str_extract(splits[, 2], "0*$") %>% nchar
+      extra <- nchar(
+        str_extract(mat[, 2], "0*$")
+      )
       extra[is.na(extra)] <- 0
       extra <- extra + V1_extra
 
       x <- suppressWarnings(as.numeric(x)) #and transform back to numeric after capturing extra
     }
   }
+
   if (is.numeric(x)) {
     digits <- as.integer(digits)
     x      <- sprintf(paste0("%0.", digits, "e"), x)
   }
   targ   <- str_extract(x, "(\\d+\\.?\\d*)")
-  splits <- str_match(targ, "^0*([0-9]*)\\.?([0-9]*[^0$])") %>%
-    apply(X = ., 2, list) %>% unlist(recursive = FALSE)
+  splits <- str_match(targ, "^0*([0-9]*)\\.?([0-9]*[^0$])")
+  splits <- unlist(
+    apply(splits, 2, list),
+    recursive = FALSE
+  )
 
   splits_nch <- lapply(splits, function(f) str_count(f, "[0-9]"))
   out        <- splits_nch[[2]] + splits_nch[[3]] + extra

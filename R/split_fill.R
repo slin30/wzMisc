@@ -41,13 +41,13 @@
 #' #Demonstrating rebind
 #' dt[, targ_additional := targ]
 #' head(split_fill(dat = dt, targ = "targ", split_on = "\\|", IDcol = "ID", rebind = TRUE))
-#'
 split_fill <- function(dat, targ, split_on, IDcol,
                        rebind = FALSE, keep.targ = FALSE, ...) {
 
-  splts_fill <- data.table::tstrsplit(dat[[targ]], split_on, ...) %>%
-    as.data.table %>%
-    .[, c(IDcol) := dat[[IDcol]]]
+  splts_fill <- as.data.table(
+    data.table::tstrsplit(dat[[targ]], split_on, ...)
+  )
+  splts_fill[, c(IDcol) := dat[[IDcol]]]
   out <- melt.data.table(splts_fill, measure.vars = patterns("V[0-9]"),
                          id.vars = c(IDcol),
                          na.rm = TRUE,
@@ -72,7 +72,7 @@ split_fill <- function(dat, targ, split_on, IDcol,
 
       names.orig   <- names(dat_orig)
       names.split  <- names(out)
-      names.unique <- c(names.orig, names.split) %>% make.unique
+      names.unique <- make.unique(c(names.orig, names.split))
 
       new.orig  <- names.unique[1:length(names.orig)]
       new.split <- names.unique[(length(names.orig)+1):length(names.unique)]

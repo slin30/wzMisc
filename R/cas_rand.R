@@ -4,7 +4,6 @@
 #'
 #' @family CAS functions
 #'
-#' @importFrom magrittr %>%
 #' @param n integer. How many random CAS RNs do you wish to generate? \code{numeric} or \code{character}
 #' input will be coerced to integer, if possible. Negative (valid) input will be transformed to
 #' positive via \code{abs}
@@ -38,12 +37,15 @@ cas_rand <- function(n) {
   lmax  <- x-7
   starts <- sample(lmax, n)
 
-  p1 <- lapply(starts, function(f) samps[f:(f + sample(1:6, 1))]) %>%
-    lapply(X = ., function(f) paste(f, collapse = ""))
-  p2 <- replicate(n, sample(0:9, 2, replace = TRUE), simplify = FALSE) %>%
-    lapply(X = ., function(f) paste(f, collapse = ""))
-  p3 <- replicate(n, sample(0:9, 1), simplify = FALSE) %>%
-    Map(as.character, .)
+  p1 <- lapply(starts, function(f)
+    paste(
+      samps[f:(f + sample(1:6, 1))],
+      collapse = "")
+  )
+  p2 <- Map(paste,
+            replicate(n, sample(0:9, 2, replace = TRUE), simplify = FALSE),
+            collapse = "")
+  p3 <- replicate(n, sample(0:9, 1), simplify = FALSE)
   out <- list(p1, p2, p3)
   do.call(paste, c(out, sep = "-"))
 }

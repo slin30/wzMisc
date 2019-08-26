@@ -9,7 +9,6 @@ Depends:
 Imports:
     data.table,
     stringr,
-    magrittr, 
     xml2,
     RCurl, 
     openssl
@@ -17,6 +16,5 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests:
-    testthat,
-    fastmatch
+    testthat
 RoxygenNote: 6.1.1
