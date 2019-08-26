@@ -3,11 +3,14 @@
 
 
 ## Miscellaneous functions package
-*Version `1.2.0`*
+*Version `1.2.1`*
 
 This is the initial major release suitable for public consumption. 
 
 ## Changelog
+`1.2.1 (2019-08-26)`
+* Add `uniquify` option with default `TRUE` for `fix_tbl_names()`
+
 `1.2.0 (2019-04-26)`
 * Add `rgb_brightness`
 
