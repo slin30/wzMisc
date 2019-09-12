@@ -37,8 +37,8 @@
 #' @export
 #'
 #' @examples
-#' str <- "<i>in-situ</i> electron microscopy"
-#' unescape_markup(str)
+#' x <- "<i>in-situ</i> electron microscopy"
+#' unescape_markup(x)
 unescape_markup <- function(x, what_ml = c("html", "xml"), iconv_encoding = FALSE, ...){
 
   if(!is.character(x)) {

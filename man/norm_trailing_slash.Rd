@@ -2,7 +2,7 @@
 % Please edit documentation in R/norm_trailing_slash.R
 \name{norm_trailing_slash}
 \alias{norm_trailing_slash}
-\title{norm_trailing_slash}
+\title{Handle trailing (and optionally, leading) slashes}
 \usage{
 norm_trailing_slash(x, how = c("remove", "replace"),
   replace_with = c("forward", "back"), strip_leading = FALSE,

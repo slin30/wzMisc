@@ -46,6 +46,6 @@ a few elements of \emph{x} that require this function, performance should be acc
 will therefore increase on an as-needed basis, and not solely as a function of \code{length(x)}.
 }
 \examples{
-str <- "<i>in-situ</i> electron microscopy"
-unescape_markup(str)
+x <- "<i>in-situ</i> electron microscopy"
+unescape_markup(x)
 }

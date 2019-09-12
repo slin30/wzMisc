@@ -1,4 +1,4 @@
-#' norm_trailing_slash
+#' Handle trailing (and optionally, leading) slashes
 #'
 #' Remove, or remove and insert a single trailing forward or back slash
 #'
