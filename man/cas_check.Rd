@@ -46,7 +46,8 @@ cas_check(c(NA, x_messy, NA)) # NA passed through
 cas_check(c(NA, NULL, x_messy, NULL, NA)) # NULL removed, length == length(x)-length(is.null(x))
 }
 \seealso{
-Other cas_functions: \code{\link{cas_checkSum}},
-  \code{\link{cas_detect}}
+Other cas_functions: 
+\code{\link{cas_checkSum}()},
+\code{\link{cas_detect}()}
 }
 \concept{cas_functions}

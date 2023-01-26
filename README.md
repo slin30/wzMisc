@@ -3,11 +3,14 @@
 
 
 ## Miscellaneous functions package
-*Version `1.3.0`*
+*Version `1.4.0`*
 
 This is the initial major release suitable for public consumption. 
 
 ## Changelog
+`1.4.0 (2023-01-26)`
+* Add `fold_na()`
+
 `1.3.0 (2019-11-06)`
 * Add `recur_unique()`
 

@@ -4,8 +4,7 @@
 \alias{ftp_makeParams}
 \title{Construct params to interact with an FTP endpoint}
 \usage{
-ftp_makeParams(host, protocol = "ftp", user = NULL, pwd = NULL,
-  extras = NULL)
+ftp_makeParams(host, protocol = "ftp", user = NULL, pwd = NULL, extras = NULL)
 }
 \arguments{
 \item{host}{(required) The host address string. Should take the form of \code{ftp.your_host.com}}
@@ -60,7 +59,9 @@ do.call(getURL, my_params)
 }
 }
 \seealso{
-Other ftp_functions: \code{\link{ftp_getBinPars}},
-  \code{\link{ftp_listDir}}, \code{\link{ftp_parseMeta}}
+Other ftp_functions: 
+\code{\link{ftp_getBinPars}()},
+\code{\link{ftp_listDir}()},
+\code{\link{ftp_parseMeta}()}
 }
 \concept{ftp_functions}

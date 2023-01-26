@@ -4,9 +4,13 @@
 \alias{norm_trailing_slash}
 \title{Handle trailing (and optionally, leading) slashes}
 \usage{
-norm_trailing_slash(x, how = c("remove", "replace"),
-  replace_with = c("forward", "back"), strip_leading = FALSE,
-  view_res = FALSE)
+norm_trailing_slash(
+  x,
+  how = c("remove", "replace"),
+  replace_with = c("forward", "back"),
+  strip_leading = FALSE,
+  view_res = FALSE
+)
 }
 \arguments{
 \item{x}{A character vector}

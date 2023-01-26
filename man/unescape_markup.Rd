@@ -4,8 +4,7 @@
 \alias{unescape_markup}
 \title{Clean up xml or html markup tags and formatting}
 \usage{
-unescape_markup(x, what_ml = c("html", "xml"), iconv_encoding = FALSE,
-  ...)
+unescape_markup(x, what_ml = c("html", "xml"), iconv_encoding = FALSE, ...)
 }
 \arguments{
 \item{x}{A character; the input you wish to unescape}

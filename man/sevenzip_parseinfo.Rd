@@ -25,8 +25,9 @@ input is a single listing from a 7-zip return, i.e. a call to 7-zip with an acti
 #TBD
 }
 \seealso{
-Other sevenzip functions: \code{\link{sevenzip_checkpath}},
-  \code{\link{sevenzip_listcont}},
-  \code{\link{sevenzip_makecmd}}
+Other sevenzip functions: 
+\code{\link{sevenzip_checkpath}()},
+\code{\link{sevenzip_listcont}()},
+\code{\link{sevenzip_makecmd}()}
 }
 \concept{sevenzip functions}

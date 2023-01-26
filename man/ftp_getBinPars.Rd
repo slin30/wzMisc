@@ -4,8 +4,7 @@
 \alias{ftp_getBinPars}
 \title{ftp_getBinPars}
 \usage{
-ftp_getBinPars(host = NULL, user = NULL, pwd = NULL, hdir = NULL,
-  ldir = NULL)
+ftp_getBinPars(host = NULL, user = NULL, pwd = NULL, hdir = NULL, ldir = NULL)
 }
 \arguments{
 \item{host}{Remote host URL}
@@ -91,7 +90,9 @@ ftp_getBinPars(
 \code{\link{curlProgress}} for the function that a successful output is expected
 to be used for.
 
-Other ftp_functions: \code{\link{ftp_listDir}},
-  \code{\link{ftp_makeParams}}, \code{\link{ftp_parseMeta}}
+Other ftp_functions: 
+\code{\link{ftp_listDir}()},
+\code{\link{ftp_makeParams}()},
+\code{\link{ftp_parseMeta}()}
 }
 \concept{ftp_functions}

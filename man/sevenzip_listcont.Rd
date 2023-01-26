@@ -4,8 +4,7 @@
 \alias{sevenzip_listcont}
 \title{List 7-zip file contents}
 \usage{
-sevenzip_listcont(archive_path, extras = NULL, recursive = FALSE,
-  parse = TRUE)
+sevenzip_listcont(archive_path, extras = NULL, recursive = FALSE, parse = TRUE)
 }
 \arguments{
 \item{archive_path}{A path containing valid file extensions. See details for allowed extensions.}
@@ -56,8 +55,9 @@ In other words, this function will not look beyond the first listing level in an
 # TBD
 }
 \seealso{
-Other sevenzip functions: \code{\link{sevenzip_checkpath}},
-  \code{\link{sevenzip_makecmd}},
-  \code{\link{sevenzip_parseinfo}}
+Other sevenzip functions: 
+\code{\link{sevenzip_checkpath}()},
+\code{\link{sevenzip_makecmd}()},
+\code{\link{sevenzip_parseinfo}()}
 }
 \concept{sevenzip functions}

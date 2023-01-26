@@ -4,8 +4,17 @@
 \alias{match_xs_ys}
 \title{Collapse multiple possible matches between two data.tables}
 \usage{
-match_xs_ys(dt_x, dt_y, xs, ys, reverse = FALSE, lower = TRUE,
-  incomparables = NA, use_fastmatch = FALSE, ...)
+match_xs_ys(
+  dt_x,
+  dt_y,
+  xs,
+  ys,
+  reverse = FALSE,
+  lower = TRUE,
+  incomparables = NA,
+  use_fastmatch = FALSE,
+  ...
+)
 }
 \arguments{
 \item{dt_x}{A data.table where you wish to find corresponding index values in \emph{dt_y}}

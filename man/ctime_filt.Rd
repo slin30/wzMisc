@@ -4,9 +4,16 @@
 \alias{ctime_filt}
 \title{Filter files by c/m/atime}
 \usage{
-ctime_filt(x, pattern, type = c("max", "min"), what_finfo = c("ctime",
-  "mtime", "atime"), only_last = TRUE, fmt = "\%Y-\%m-\%d",
-  print_limit = 6L, ...)
+ctime_filt(
+  x,
+  pattern,
+  type = c("max", "min"),
+  what_finfo = c("ctime", "mtime", "atime"),
+  only_last = TRUE,
+  fmt = "\%Y-\%m-\%d",
+  print_limit = 6L,
+  ...
+)
 }
 \arguments{
 \item{x}{Input file path}

@@ -4,8 +4,13 @@
 \alias{sevenzip_makecmd}
 \title{Create commands to perform system calls with 7-zip}
 \usage{
-sevenzip_makecmd(action = NULL, target = NULL, output = NULL,
-  extras = NULL, verbose = TRUE)
+sevenzip_makecmd(
+  action = NULL,
+  target = NULL,
+  output = NULL,
+  extras = NULL,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{action}{(required) One of \code{a,d,e,l,t,u,x}, or the literal names,
@@ -94,8 +99,9 @@ unlink(paste(my_tempdir, "extracted", sep = "/"), recursive = TRUE)
 }
 }
 \seealso{
-Other sevenzip functions: \code{\link{sevenzip_checkpath}},
-  \code{\link{sevenzip_listcont}},
-  \code{\link{sevenzip_parseinfo}}
+Other sevenzip functions: 
+\code{\link{sevenzip_checkpath}()},
+\code{\link{sevenzip_listcont}()},
+\code{\link{sevenzip_parseinfo}()}
 }
 \concept{sevenzip functions}

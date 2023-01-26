@@ -4,8 +4,12 @@
 \alias{remove_ifall_cols}
 \title{Remove all columns that match one or more critieria}
 \usage{
-remove_ifall_cols(df, ifallwhat = NULL, factor_as_chr = TRUE,
-  drop_all_NA = TRUE)
+remove_ifall_cols(
+  df,
+  ifallwhat = NULL,
+  factor_as_chr = TRUE,
+  drop_all_NA = TRUE
+)
 }
 \arguments{
 \item{df}{A data.frame (or data.table)}

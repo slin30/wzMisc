@@ -45,7 +45,8 @@ cas_bad  <- c("61-43-2", "18323-40-9", "7732-18-4") #single digit change from go
 cas_checkSum(c(cas_good, cas_bad))
 }
 \seealso{
-Other cas_functions: \code{\link{cas_check}},
-  \code{\link{cas_detect}}
+Other cas_functions: 
+\code{\link{cas_check}()},
+\code{\link{cas_detect}()}
 }
 \concept{cas_functions}

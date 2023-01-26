@@ -44,8 +44,9 @@ sevenzip_checkpath(print.to.console = TRUE) # Also view options and other info
 }
 }
 \seealso{
-Other sevenzip functions: \code{\link{sevenzip_listcont}},
-  \code{\link{sevenzip_makecmd}},
-  \code{\link{sevenzip_parseinfo}}
+Other sevenzip functions: 
+\code{\link{sevenzip_listcont}()},
+\code{\link{sevenzip_makecmd}()},
+\code{\link{sevenzip_parseinfo}()}
 }
 \concept{sevenzip functions}

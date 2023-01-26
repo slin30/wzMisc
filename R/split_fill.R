@@ -30,11 +30,15 @@
 #' @export
 #' @examples
 #' library(data.table)
-#' set.seed(1)
 #' dt <- data.table(
-#'     ID = 1:10,
-#'     targ = sapply(1:10, function(f)
-#'         paste(sample(LETTERS, sample(1:5)), collapse = "|"))
+#'   ID = 1:10,
+#'   targ = sapply(1:10, function(f)
+#'     paste0(
+#'       LETTERS[1:5],
+#'       f,
+#'       collapse = "|"
+#'     )
+#'   )
 #' )
 #' head(split_fill(dat = dt, targ = "targ", split_on = "\\|", IDcol = "ID"))
 #'
