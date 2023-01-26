@@ -14,8 +14,8 @@
 #'
 #' The function will exit when it detects that no additional \code{NA} values are present or when all
 #' inputs have been evaluated, whichever comes first. If you supply e.g. a non-missing vector of length 1
-#' as the first input, then the function will only ever return that supplied value because the one of the
-#' two aforementioned conditions will have been satisfied. See examples
+#' as the first input, then the function will only ever return that supplied value because one of the
+#' two aforementioned conditions will have been satisfied. See examples.
 #'
 #' @return
 #' An atomic vector of the same type as the inputs (although any class attributes will be stripped). The
