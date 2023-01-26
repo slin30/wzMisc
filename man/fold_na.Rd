@@ -33,7 +33,7 @@ two aforementioned conditions will have been satisfied. See examples
 \note{
 The non-exported helper function \code{.fold_na_base()} has slightly different behavior when handling
 vectors of length 1 combined with vectors of length > 1, regardless of argument order. The helper
-ensures outputs are always the length of the longest input(s). If this is desireable, then you can
+ensures outputs are always the length of the longest input(s). If this is desirable, then you can
 effectively achieve the same result by calling the helper along with e.g. \link[base]{Reduce}. If so, make
 sure you pass the inputs as a (flat) \code{list}.
 }
@@ -44,7 +44,7 @@ z <- c(NA, 2L, NA, 4L, NA, 6L, NA, 8L, NA, 10L)
 
 fold_na(x) # returns x
 
-fold_na(y, z) # regnerates x
+fold_na(y, z) # regenerates x
 fold_na(list(y, z)) # same
 
 # works the same on data.frames
